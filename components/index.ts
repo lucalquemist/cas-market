@@ -9,6 +9,7 @@ export * from './criterios/criterio-gridABM/CriterioGrid';
 
 export * from './marcas/marca-grid/MarcaGrid';
 export * from './marcas/marca-grid/MarcaGridItem';
+export * from './marcas/marca-grid/MarcaTopMenu';
 
 export * from './faqs/FaqList';
 export * from './faqs/FaqListItem';

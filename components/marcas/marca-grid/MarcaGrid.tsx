@@ -2,38 +2,31 @@
 
 import { MarcasResultados } from "@/interfaces";
 import { MarcaGridItem } from "./MarcaGridItem";
+import { MarcaTopMenu } from "./MarcaTopMenu";
 
 interface Props {
-    //marcas: Marca[];
-    marcasResultados: MarcasResultados;
+  //marcas: Marca[];
+  marcasResultados: MarcasResultados;
 }
 
 export const MarcaGrid = ({ marcasResultados }: Props) => {
 
   return (
-    <div className="grid grid-cols-1 p-5 sm:grid-cols-3 gap-10 mb-10">
-      {Object.entries(marcasResultados).map(([id, marca]) => (
-        /*<div key={id}>
-          <div className="flex gap-5">
-            <h2>{marca.name}</h2>
-            <h2>{marca.totalScore}</h2>
-          </div>
-
-          {Object.entries(marca.sections).map(([section, score]) => (
-            <p key={section}>
-              {section}: {Number(score)}
-            </p>
-          ))}
-        </div> */
-        <MarcaGridItem
-              key={id}
-              marca={marca}
-        />
-      ))}
+    <div>
+      <MarcaTopMenu />
+      <div className="grid grid-cols-1 p-5 sm:grid-cols-3 gap-5 mb-10">
+        {Object.entries(marcasResultados).map(([id, marca]) => (
+          <MarcaGridItem
+            key={id}
+            marca={marca}
+          />
+        ))}
+      </div>
     </div>
+
   );
 
-} // como puedo mapear result{}
+}
 
 
 /*
@@ -59,6 +52,7 @@ export const MarcaGrid = ({ marcas }: Props) => {
 import { useCriteriosStore } from "@/store";
 import { Criterio } from "@/interfaces";
 import { CriterioGridItem } from "./CriterioGridItem";
+import { MarcaTopMenu } from './MarcaTopMenu';
 
 
 interface Props {

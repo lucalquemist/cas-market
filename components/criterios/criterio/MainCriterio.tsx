@@ -30,7 +30,7 @@ export const MainCriterio = ({ criterio }: Props) => {
 
   return (
     //<div className={ className }>
-    <div className="m-10 p-5 rounded-md overflow-hidden fade-in border">
+    <div className="p-5 rounded-md overflow-hidden fade-in border">
 
       <p className="text-2xl">{ criterio.title }</p>
 
