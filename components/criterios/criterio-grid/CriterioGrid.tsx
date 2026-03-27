@@ -16,7 +16,7 @@ export const CriterioGrid = ({ criterios }: Props) => {
   const favoritos = Object.values(favorites)
 
   return (
-    <div className="ml-3 mr-3">
+    <div className="ml-3 mr-3 max-w-300">
       <p className="mb-3">Criterios seleccionados:</p>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-10">
         {

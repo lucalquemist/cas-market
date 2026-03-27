@@ -127,6 +127,7 @@ export default function MarcasPage() {
             const marcaResult = { // acá agrego el id
                 id: marca.id,
                 name: marca.name,
+                category: marca.category,
                 totalScore: 0,
                 sections: {} as Record<string, number>
             };
@@ -169,13 +170,12 @@ export default function MarcasPage() {
     const marcasResultados = calcularResultadosOptimizado(marcas, sectionsMap);
 
     console.log('resultados: ');
-    console.log(marcasResultados); // hay que enviar estos resultados al proximo componente y crearle una interfaz
+    console.log(marcasResultados);
 
     return (
         <>
             <MarcaGrid
                 marcasResultados={marcasResultados}
-            // marcasResultados={marcasResults}
             />
             <div className="hidden">
                 <h1>Marca Page</h1>

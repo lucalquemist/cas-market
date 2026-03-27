@@ -4,6 +4,7 @@ export interface MarcasResultados {
     [id: number]: {
         id: number;
         name: string;
+        category: string;
         totalScore: number;
         sections: SeedDatos;
     }

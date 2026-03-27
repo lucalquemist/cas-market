@@ -9,12 +9,53 @@ interface Props {
   marcasResultados: MarcasResultados;
 }
 
+interface Categories {
+  [category: string]: MarcasResultados;
+}
+
 export const MarcaGrid = ({ marcasResultados }: Props) => {
+
+  // algoritmo que agrupa las marcas en un objeto según el tipo de marca
+  // recorro las marcas y en cada una pregunto por la categoría, si no existe esa llave en el objeto resultado
+  // entonces la creo y luego le asigno esa marca a el arreglo de esa posicion
+  
+  function mapToCategory(marcasResultados: MarcasResultados): Categories {
+    
+    const result: Categories = {};
+    const marcasResultados2 = Object.entries(marcasResultados);
+
+    for (const marca of marcasResultados2) {
+      //const category = marca
+    }
+
+    return result;
+  }
+
+  /**
+   * function mapToSections(criterios: Criterio[]): Sections {
+           const result: Sections = {};
+   
+           for (const criterio of criterios) {
+               const section = criterio.section as keyof Sections;
+   
+               if (!result[section]) {
+                   result[section] = [];
+               }
+   
+               result[section]!.push(...criterio.variables);
+           }
+           console.log('result: ');
+           console.log(result);
+           return result;
+       }
+       const arrSections = mapToSections(favoritos);
+   */
 
   return (
     <div>
       <MarcaTopMenu />
-      <div className="grid grid-cols-1 p-5 sm:grid-cols-3 gap-5 mb-10">
+
+      <div className="grid grid-cols-1 p-5 sm:grid-cols-3 gap-5 mb-10 sm:max-w-300">
         {Object.entries(marcasResultados).map(([id, marca]) => (
           <MarcaGridItem
             key={id}
@@ -28,6 +69,12 @@ export const MarcaGrid = ({ marcasResultados }: Props) => {
 
 }
 
+/*
+* tengo que agrupar las marcas según el tipo de producto
+* puedo hacer un algoritmo que agrupe las marcas en grupos en un objeto
+* luego a cada botón le hago acceder a esa parte del objeto de grupos
+* 
+*/
 
 /*
 export const MarcaGrid = ({ marcas }: Props) => {

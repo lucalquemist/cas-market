@@ -33,6 +33,7 @@ interface SeedOption {
 interface SeedMarca {
     id: number;
     name: string;
+    category: string;
     datos: SeedDatos;
     //responsabilidad_en_el_manejo_de_datos?: any;
     //responsabilidad_belica?: any;
@@ -295,11 +296,13 @@ export const initialData: seedData = {
         {
             id: 801,
             name: 'Meta', // datos y genocidio¿ // agregar atributos: los necesarios, su valor y sus fuentes
+            category: 'Software',
             datos: {},
         },
         {
             id: 802,
             name: 'Telegram',
+            category: 'Software',
             datos: {
                 responsabilidad_en_el_manejo_de_datos: {
                     Falta_de_Proporcionalidad_y_Necesidad: false,
@@ -313,6 +316,7 @@ export const initialData: seedData = {
         {
             id: 803,
             name: 'Microsoft', // datos y genocidio
+            category: 'Software',
             datos: {
                 responsabilidad_en_el_manejo_de_datos: {
                     Falta_de_Proporcionalidad_y_Necesidad: true,
@@ -329,6 +333,7 @@ export const initialData: seedData = {
         {
             id: 804,
             name: 'Nestlé', // explotación y genocidio
+            category: 'Alimentos',
             datos: {
                 responsabilidad_laboral: {
                     grado_de_explotación_infantil: 'esclavitud',
@@ -340,17 +345,20 @@ export const initialData: seedData = {
         },
         {
             id: 805,
+            category: 'vestimenta',
             name: 'H&M', // explotación laboral y greenwashing
             datos: {},
         },
         {
             id: 806,
             name: 'Fairphone', // único productor que certifica 0 explotación laboral
+            category: 'Electrónicos',
             datos: {},
         },
         {
             id: 807,
             name: 'Iphone', // esclavitud, trabajo forzoso
+            category: 'Electrónicos',
             datos: {
                 responsabilidad_laboral: {
                     presencia_de_trabajo_forzoso: true,
@@ -360,6 +368,7 @@ export const initialData: seedData = {
         {
             id: 808,
             name: 'Spotify', // modelo de negocio poco ético
+            category: 'Software',
             datos: {
                 responsabilidad_belica: {
                     responsabilidad_belica_empresarial: 'complicidad directa',
@@ -369,6 +378,7 @@ export const initialData: seedData = {
         {
             id: 809,
             name: 'Colgate', // animales y genocidio
+            category: 'Higiene personal',
             datos: {
 
                 responsabilidad_belica: {
@@ -379,6 +389,7 @@ export const initialData: seedData = {
         {
             id: 810,
             name: 'new', //
+            category: '',
             datos: {},
         },
         // ver casos en las apps instaladas en el cel

@@ -11,7 +11,8 @@ export default function ShopLayout({ children }: {
         <TopMenu />
         { /* sidebar */ }
         <Sidebar />
-        <div className='px-0 sm:px-10'>
+        {/* <div className='px-0 sm:px-10 flex sm:justify-center'> */}
+        <div className='px-0 sm:px-10 sm:flex sm:justify-center'>
         { children }
         </div>
         { /* footer */ }   

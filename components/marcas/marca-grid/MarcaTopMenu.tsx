@@ -5,12 +5,13 @@ export const MarcaTopMenu = () => {
     <div className="mt-10 mb-5">
         <div className="ml-3 mr-3 pr-3 pl-3 flex justify-start items-center truncate gap-7">
             <p className="border-b-4 border-indigo-600 p-2">Todas</p>
-            <p>Software</p>
-            <p>Vehiculos</p>
             <p>Alimentos</p>
-            <p>Electrónica</p>
+            <p>Vestimenta</p>
             <p>Higiene personal</p>
+            <p>Software</p>
+            <p>Electrónicos</p>
             <p>Servicios</p>
+            <p>Vehiculos</p>
         </div>
     </div>
   )

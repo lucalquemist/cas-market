@@ -5,7 +5,7 @@ export * from './ui/top-menu/TopMenu';
 export * from './ui/sidebar/Sidebar';
 
 export * from './criterios/criterio/MainCriterio';
-export * from './criterios/criterio-gridABM/CriterioGrid';
+export * from './criterios/criterio-grid/CriterioGrid';
 
 export * from './marcas/marca-grid/MarcaGrid';
 export * from './marcas/marca-grid/MarcaGridItem';

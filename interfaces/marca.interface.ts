@@ -11,6 +11,7 @@ export interface Marca {
 export interface Marca {
     id: number;
     name: string;
+    category: string;
     datos: SeedDatos;
 }
 interface SeedDatos {
