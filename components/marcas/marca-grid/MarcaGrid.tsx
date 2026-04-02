@@ -2,61 +2,51 @@
 
 import { MarcasResultados } from "@/interfaces";
 import { MarcaGridItem } from "./MarcaGridItem";
-import { MarcaTopMenu } from "./MarcaTopMenu";
+import { MarcaTopMenu } from "./marcaTopMenu/MarcaTopMenu";
+import { initialData } from "@/seed/seed";
+import { useMarcaStore } from "@/store";
 
 interface Props {
   //marcas: Marca[];
   marcasResultados: MarcasResultados;
 }
 
-interface Categories {
-  [category: string]: MarcasResultados;
+interface Categorias {
+  Todas: number[],
+  Alimentos: number[],
+  Vestimenta: number[],
+  HigienePersonal: number[],
+  Software: number[],
+  Electronicos: number[],
+  Servicios: number[],
+  Vehiculos: number[],
 }
+
+type Cats = 'Todas' | 'Alimentos' | 'Vestimenta' | 'HigienePersonal' | 'Software' | 'Electronicos' | 'Servicios' | 'Vehiculos';
 
 export const MarcaGrid = ({ marcasResultados }: Props) => {
 
-  // algoritmo que agrupa las marcas en un objeto según el tipo de marca
-  // recorro las marcas y en cada una pregunto por la categoría, si no existe esa llave en el objeto resultado
-  // entonces la creo y luego le asigno esa marca a el arreglo de esa posicion
-  
-  function mapToCategory(marcasResultados: MarcasResultados): Categories {
-    
-    const result: Categories = {};
-    const marcasResultados2 = Object.entries(marcasResultados);
+  // empresas por categoría, es un objeto del seed
+  const categorias = initialData.categorias as Categorias; // esto puede ir dentro del topmenu de marca
+  // const categorias2 = Object.values(categorias);
+  const categorias2 = Object.keys(categorias);
+  //* recupero la categoria seleccionada
+  const catSel: keyof Categorias = useMarcaStore(state => state.categorySelected)
 
-    for (const marca of marcasResultados2) {
-      //const category = marca
-    }
+  console.log(categorias[catSel]); // tengo el arreglo de ids
 
-    return result;
+  // creamos otro objeto igual al de resultados pero solo con los de la categoria
+  let marcasResultados2: MarcasResultados = {}
+  for (const marcares of categorias[catSel]) {
+    marcasResultados2[marcares] = marcasResultados[marcares]
   }
-
-  /**
-   * function mapToSections(criterios: Criterio[]): Sections {
-           const result: Sections = {};
-   
-           for (const criterio of criterios) {
-               const section = criterio.section as keyof Sections;
-   
-               if (!result[section]) {
-                   result[section] = [];
-               }
-   
-               result[section]!.push(...criterio.variables);
-           }
-           console.log('result: ');
-           console.log(result);
-           return result;
-       }
-       const arrSections = mapToSections(favoritos);
-   */
 
   return (
     <div>
       <MarcaTopMenu />
 
       <div className="grid grid-cols-1 p-5 sm:grid-cols-3 gap-5 mb-10 sm:max-w-300">
-        {Object.entries(marcasResultados).map(([id, marca]) => (
+        {Object.entries(marcasResultados2).map(([id, marca]) => (
           <MarcaGridItem
             key={id}
             marca={marca}
@@ -75,6 +65,25 @@ export const MarcaGrid = ({ marcasResultados }: Props) => {
 * luego a cada botón le hago acceder a esa parte del objeto de grupos
 * 
 */
+
+/**
+ * function mapToCategory(marcasResultados: MarcasResultados): Categories {
+    
+    // algoritmo que agrupa las marcas en un objeto según el tipo de marca
+    // recorro las marcas y en cada una pregunto por la categoría, si no existe esa llave en el objeto resultado
+    // entonces la creo y luego le asigno esa marca a el arreglo de esa posicion
+
+
+    const result: Categories = {};
+    const marcasResultados2 = Object.entries(marcasResultados);
+
+    for (const marca of marcasResultados2) {
+      //const category = marca
+    }
+
+    return result;
+  }
+ */
 
 /*
 export const MarcaGrid = ({ marcas }: Props) => {

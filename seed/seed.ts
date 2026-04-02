@@ -33,6 +33,7 @@ interface SeedOption {
 interface SeedMarca {
     id: number;
     name: string;
+    slug: string;
     category: string;
     datos: SeedDatos;
     //responsabilidad_en_el_manejo_de_datos?: any;
@@ -76,6 +77,16 @@ interface seedData {
     marcas: SeedMarca[],
     marcasResultados: SeedMarcaResults[],
     informacion: SeedInfo[],
+    categorias: {
+        Todas: number[],
+        Alimentos: number[],
+        Vestimenta: number[],
+        HigienePersonal: number[],
+        Software: number[],
+        Electronicos: number[],
+        Servicios: number[],
+        Vehiculos: number[],
+    },
     faqs: SeedFAQ[],
 }
 
@@ -296,12 +307,14 @@ export const initialData: seedData = {
         {
             id: 801,
             name: 'Meta', // datos y genocidio¿ // agregar atributos: los necesarios, su valor y sus fuentes
+            slug: 'Meta',
             category: 'Software',
             datos: {},
         },
         {
             id: 802,
             name: 'Telegram',
+            slug: 'Telegram',
             category: 'Software',
             datos: {
                 responsabilidad_en_el_manejo_de_datos: {
@@ -316,6 +329,7 @@ export const initialData: seedData = {
         {
             id: 803,
             name: 'Microsoft', // datos y genocidio
+            slug: 'Microsoft',
             category: 'Software',
             datos: {
                 responsabilidad_en_el_manejo_de_datos: {
@@ -333,6 +347,7 @@ export const initialData: seedData = {
         {
             id: 804,
             name: 'Nestlé', // explotación y genocidio
+            slug: 'Nestlé',
             category: 'Alimentos',
             datos: {
                 responsabilidad_laboral: {
@@ -347,17 +362,20 @@ export const initialData: seedData = {
             id: 805,
             category: 'vestimenta',
             name: 'H&M', // explotación laboral y greenwashing
+            slug: 'H&M',
             datos: {},
         },
         {
             id: 806,
             name: 'Fairphone', // único productor que certifica 0 explotación laboral
+            slug: 'Fairphone',
             category: 'Electrónicos',
             datos: {},
         },
         {
             id: 807,
             name: 'Iphone', // esclavitud, trabajo forzoso
+            slug: 'Iphone',
             category: 'Electrónicos',
             datos: {
                 responsabilidad_laboral: {
@@ -368,6 +386,7 @@ export const initialData: seedData = {
         {
             id: 808,
             name: 'Spotify', // modelo de negocio poco ético
+            slug: 'Spotify',
             category: 'Software',
             datos: {
                 responsabilidad_belica: {
@@ -378,6 +397,7 @@ export const initialData: seedData = {
         {
             id: 809,
             name: 'Colgate', // animales y genocidio
+            slug: 'Colgate',
             category: 'Higiene personal',
             datos: {
 
@@ -389,6 +409,7 @@ export const initialData: seedData = {
         {
             id: 810,
             name: 'new', //
+            slug: 'new',
             category: '',
             datos: {},
         },
@@ -555,6 +576,16 @@ export const initialData: seedData = {
         {},
         {},
     ], // agregar enlace a los datos...
+    categorias: {
+        Todas: [801],
+        Alimentos: [804, 801],
+        Vestimenta: [805, 801],
+        HigienePersonal: [809, 801],
+        Software: [801, 802, 803, 808],
+        Electronicos: [806, 807, 801],
+        Servicios: [801, 801],
+        Vehiculos: [801, 801],
+    },
     faqs: [
         {
             id: 901,

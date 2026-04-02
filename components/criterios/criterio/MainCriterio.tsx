@@ -98,10 +98,7 @@ export const MainCriterio = ({ criterio }: Props) => {
       
       <div className="hidden">
       <p>tareas:</p>
-      <p>los textos deben estar unidos y solo pintamos el fondo de distintocolor</p>
-      <p>indicar en cada caso a que nos referimos: varibles, opciones, etc.</p>
       <p>probemos separar los textos con cuadriculas</p>
-      <p>hacer una pagina de FAQS en el inicio</p>
       <p>corregir opciones de criterios: debe haber al menos una opcion que no reste puntos</p>
       </div>
       
