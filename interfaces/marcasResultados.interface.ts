@@ -1,5 +1,10 @@
+import { Marca } from "./marca.interface";
 
+export interface MarcasResultados {
+    [id: number]: Marca;
+}
 
+/*
 export interface MarcasResultados {
     [id: number]: {
         id: number;
@@ -24,4 +29,4 @@ export interface MarcaResultados {
     name: string;
     totalScore: number;
     sections: SeedDatos;
-}
+}*/

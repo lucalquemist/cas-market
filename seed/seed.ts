@@ -29,36 +29,60 @@ interface SeedOption {
     score: number;
     description: string;
 }
+//********************************************************************************************/
+export interface SeedMarcas {
+    [id: number]: SeedMarca;
+}
 
-interface SeedMarca {
+export interface SeedMarca {
     id: number;
     name: string;
     slug: string;
     category: string;
-    datos: SeedDatos;
-    //responsabilidad_en_el_manejo_de_datos?: any;
-    //responsabilidad_belica?: any;
-    //responsabilidad_con_animales?: any;
-    //responsabilidad_laboral?: any;
+    score: {
+        [key: string]: number;
+    },
+    sections: SeedSecciones;
 }
-interface SeedDatos {
-    // [key: string]: SeedDato;
-    responsabilidad_en_el_manejo_de_datos?: SeedDato;
-    responsabilidad_belica?: SeedDato;
-    responsabilidad_con_animales?: SeedDato;
-    responsabilidad_laboral?: SeedDato;
+
+export interface SeedSecciones {
+    responsabilidad_en_el_manejo_de_datos?: SeedVariables;
+    responsabilidad_belica?: SeedVariables;
+    responsabilidad_con_animales?: SeedVariables;
+    responsabilidad_laboral?: SeedVariables;
+}
+
+export interface SeedVariables {
+    [key: string]: {
+        valor: any,
+        score: number,
+    }
+}
+/*interface SeedMarca {
+    id: number;
+    name: string;
+    slug: string;
+    category: string;
+    score: {
+        [key: string]: number;
+    },
+    secciones: {
+        responsabilidad_en_el_manejo_de_datos?: SeedDato;
+        responsabilidad_belica?: SeedDato;
+        responsabilidad_con_animales?: SeedDato;
+        responsabilidad_laboral?: SeedDato;
+    }
 }
 interface SeedDato {
     [key: string]: any;
-}
+}*/
+// interface SeedDatos {
+//     responsabilidad_en_el_manejo_de_datos?: SeedDato;
+//     responsabilidad_belica?: SeedDato;
+//     responsabilidad_con_animales?: SeedDato;
+//     responsabilidad_laboral?: SeedDato;
+// }
 
-
-interface SeedMarcaResults {
-    idMarca: number;
-    nameEmpresa: string;
-    total: number;
-    results: any;
-}
 
 interface SeedInfo { }
 
@@ -75,7 +99,6 @@ interface seedData {
     variables: SeedInformation[],
     criterios: SeedCriterio[],
     marcas: SeedMarca[],
-    marcasResultados: SeedMarcaResults[],
     informacion: SeedInfo[],
     categorias: {
         Todas: number[],
@@ -89,7 +112,6 @@ interface seedData {
     },
     faqs: SeedFAQ[],
 }
-
 
 export const initialData: seedData = {
     variables: [
@@ -309,38 +331,80 @@ export const initialData: seedData = {
             name: 'Meta', // datos y genocidio¿ // agregar atributos: los necesarios, su valor y sus fuentes
             slug: 'Meta',
             category: 'Software',
-            datos: {},
+            score: {
+                total: 0,
+            },
+            sections: {},
         },
         {
             id: 802,
             name: 'Telegram',
             slug: 'Telegram',
             category: 'Software',
-            datos: {
+            score: {
+                total: 0,
+            },
+            sections: {
                 responsabilidad_en_el_manejo_de_datos: {
-                    Falta_de_Proporcionalidad_y_Necesidad: false,
-                    Ausencia_de_Consentimiento: false,
-                    Deficiencias_de_Seguridad: false,
-                    Uso_Opaco_y_Falta_de_Transparencia: false,
-                    Incumplimiento_Normativo: false,
-                }
+                    Falta_de_Proporcionalidad_y_Necesidad: {
+                        valor: false,
+                        score: 0
+                    },
+                    Ausencia_de_Consentimiento: {
+                        valor: false,
+                        score: 0
+                    },
+                    Deficiencias_de_Seguridad: {
+                        valor: false,
+                        score: 0
+                    },
+                    Uso_Opaco_y_Falta_de_Transparencia: {
+                        valor: false,
+                        score: 0
+                    },
+                    Incumplimiento_Normativo: {
+                        valor: false,
+                        score: 0
+                    },
+                },
             },
         },
         {
             id: 803,
-            name: 'Microsoft', // datos y genocidio
+            name: 'Microsoft',
             slug: 'Microsoft',
             category: 'Software',
-            datos: {
+            score: {
+                total: 0,
+            },
+            sections: {
                 responsabilidad_en_el_manejo_de_datos: {
-                    Falta_de_Proporcionalidad_y_Necesidad: true,
-                    Ausencia_de_Consentimiento: true,
-                    Deficiencias_de_Seguridad: false,
-                    Uso_Opaco_y_Falta_de_Transparencia: true,
-                    Incumplimiento_Normativo: true,
+                    Falta_de_Proporcionalidad_y_Necesidad: {
+                        valor: true,
+                        score: 0
+                    },
+                    Ausencia_de_Consentimiento: {
+                        valor: true,
+                        score: 0
+                    },
+                    Deficiencias_de_Seguridad: {
+                        valor: false,
+                        score: 0
+                    },
+                    Uso_Opaco_y_Falta_de_Transparencia: {
+                        valor: true,
+                        score: 0
+                    },
+                    Incumplimiento_Normativo: {
+                        valor: true,
+                        score: 0
+                    },
                 },
                 responsabilidad_belica: {
-                    responsabilidad_belica_empresarial: 'complicidad directa',
+                    responsabilidad_belica_empresarial: {
+                        valor: 'complicidad directa',
+                        score: 0
+                    },
                 },
             },
         },
@@ -349,12 +413,21 @@ export const initialData: seedData = {
             name: 'Nestlé', // explotación y genocidio
             slug: 'Nestlé',
             category: 'Alimentos',
-            datos: {
+            score: {
+                total: 0,
+            },
+            sections: {
                 responsabilidad_laboral: {
-                    grado_de_explotación_infantil: 'esclavitud',
+                    grado_de_explotación_infantil: {
+                        valor: 'esclavitud',
+                        score: 0
+                    },
                 },
                 responsabilidad_belica: {
-                    responsabilidad_belica_empresarial: 'complicidad indirecta',
+                    responsabilidad_belica_empresarial: {
+                        valor: 'complicidad indirecta',
+                        score: 0
+                    },
                 },
             },
         },
@@ -363,23 +436,35 @@ export const initialData: seedData = {
             category: 'vestimenta',
             name: 'H&M', // explotación laboral y greenwashing
             slug: 'H&M',
-            datos: {},
+            score: {
+                total: 0,
+            },
+            sections: {},
         },
         {
             id: 806,
             name: 'Fairphone', // único productor que certifica 0 explotación laboral
             slug: 'Fairphone',
             category: 'Electrónicos',
-            datos: {},
+            score: {
+                total: 0,
+            },
+            sections: {},
         },
         {
             id: 807,
             name: 'Iphone', // esclavitud, trabajo forzoso
             slug: 'Iphone',
             category: 'Electrónicos',
-            datos: {
+            score: {
+                total: 0,
+            },
+            sections: {
                 responsabilidad_laboral: {
-                    presencia_de_trabajo_forzoso: true,
+                    presencia_de_trabajo_forzoso: {
+                        valor: true,
+                        score: 0
+                    },
                 },
             },
         },
@@ -388,9 +473,15 @@ export const initialData: seedData = {
             name: 'Spotify', // modelo de negocio poco ético
             slug: 'Spotify',
             category: 'Software',
-            datos: {
+            score: {
+                total: 0,
+            },
+            sections: {
                 responsabilidad_belica: {
-                    responsabilidad_belica_empresarial: 'complicidad directa',
+                    responsabilidad_belica_empresarial: {
+                        valor: 'complicidad directa',
+                        score: 0
+                    },
                 },
             },
         },
@@ -399,10 +490,15 @@ export const initialData: seedData = {
             name: 'Colgate', // animales y genocidio
             slug: 'Colgate',
             category: 'Higiene personal',
-            datos: {
-
+            score: {
+                total: 0,
+            },
+            sections: {
                 responsabilidad_belica: {
-                    responsabilidad_belica_empresarial: 'complicidad indirecta',
+                    responsabilidad_belica_empresarial: {
+                        valor: 'complicidad indirecta',
+                        score: 0
+                    },
                 },
             },
         },
@@ -411,172 +507,19 @@ export const initialData: seedData = {
             name: 'new', //
             slug: 'new',
             category: '',
-            datos: {},
+            score: {
+                total: 0,
+            },
+            sections: {},
         },
         // ver casos en las apps instaladas en el cel
     ],
-    marcasResultados: [ // agregar la proyección de la empresa
-        {
-            idMarca: 803,
-            nameEmpresa: 'Microsoft',
-            total: -175,
-            results: {
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: '', score: -100 },
-                ],
-                responsabilidad_en_el_manejo_de_datos: [
-                    { variable: 'Falta_de_Proporcionalidad_y_Necesidad', optionSelected: 'true', score: -15 },
-                    { variable: 'Ausencia_de_Consentimiento', optionSelected: 'true', score: -25 },
-                    { variable: 'Deficiencias_de_Seguridad', optionSelected: 'false', score: 0 },
-                    { variable: 'Uso_Opaco_y_Falta_de_Transparencia', optionSelected: 'true', score: -20 },
-                    { variable: 'Incumplimiento_Normativo', optionSelected: 'true', score: -15 },
-                ],
-            },
-        },
-        {
-            idMarca: 802,
-            nameEmpresa: 'Telegram',
-            total: 0,
-            results: {},
-        },
-        {
-            idMarca: 804,
-            nameEmpresa: 'Nestlé',
-            total: -180,
-            results: {
-                contra_la_explotacion_infantil: [
-                    { variable: 'grado_de_explotación_infantil', optionSelected: 'esclavitud', score: -100 },
-                ],
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: 'complicidad indirecta', score: -80 },
-                ],
-                contra_la_explotación_laboral: [
-                    { variable: 'presencia_de_trabajo_forzoso', optionSelected: '', score: 0 },
-                ],
-            },
-        },
-        {
-            idMarca: 806,
-            nameEmpresa: 'Firephone',
-            total: 0,
-            results: {
-                contra_la_explotacion_infantil: [
-                    { variable: 'grado_de_explotación_infantil', optionSelected: '', score: 0 },
-                ],
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: '', score: 0 },
-                ],
-                contra_la_explotación_laboral: [
-                    { variable: 'presencia_de_trabajo_forzoso', optionSelected: '', score: 0 },
-                ],
-                responsabilidad_en_el_manejo_de_datos: [
-                    { variable: 'Falta_de_Proporcionalidad_y_Necesidad', optionSelected: '', score: 0 },
-                    { variable: 'Ausencia_de_Consentimiento', optionSelected: '', score: 0 },
-                    { variable: 'Deficiencias_de_Seguridad', optionSelected: '', score: 0 },
-                    { variable: 'Uso_Opaco_y_Falta_de_Transparencia', optionSelected: '', score: 0 },
-                    { variable: 'Incumplimiento_Normativo', optionSelected: '', score: 0 },
-                ],
-            },
-        },
-        {
-            idMarca: 807,
-            nameEmpresa: 'Iphone',
-            total: -100,
-            results: {
-                contra_la_explotacion_infantil: [
-                    { variable: 'grado_de_explotación_infantil', optionSelected: '', score: 0 },
-                ],
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: '', score: 0 },
-                ],
-                contra_la_explotación_laboral: [
-                    { variable: 'presencia_de_trabajo_forzoso', optionSelected: true, score: -100 },
-                ],
-                responsabilidad_en_el_manejo_de_datos: [
-                    { variable: 'Falta_de_Proporcionalidad_y_Necesidad', optionSelected: '', score: 0 },
-                    { variable: 'Ausencia_de_Consentimiento', optionSelected: '', score: 0 },
-                    { variable: 'Deficiencias_de_Seguridad', optionSelected: '', score: 0 },
-                    { variable: 'Uso_Opaco_y_Falta_de_Transparencia', optionSelected: '', score: 0 },
-                    { variable: 'Incumplimiento_Normativo', optionSelected: '', score: 0 },
-                ],
-            },
-        },
-        {
-            idMarca: 808,
-            nameEmpresa: 'Spotify',
-            total: -100,
-            results: {
-                contra_la_explotacion_infantil: [
-                    { variable: 'grado_de_explotación_infantil', optionSelected: '', score: 0 },
-                ],
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: 'complicidad directa', score: -100 },
-                ],
-                contra_la_explotación_laboral: [
-                    { variable: 'presencia_de_trabajo_forzoso', optionSelected: '', score: 0 },
-                ],
-                responsabilidad_en_el_manejo_de_datos: [
-                    { variable: 'Falta_de_Proporcionalidad_y_Necesidad', optionSelected: '', score: 0 },
-                    { variable: 'Ausencia_de_Consentimiento', optionSelected: '', score: 0 },
-                    { variable: 'Deficiencias_de_Seguridad', optionSelected: '', score: 0 },
-                    { variable: 'Uso_Opaco_y_Falta_de_Transparencia', optionSelected: '', score: 0 },
-                    { variable: 'Incumplimiento_Normativo', optionSelected: '', score: 0 },
-                ],
-            },
-        },
-        {
-            idMarca: 809,
-            nameEmpresa: 'Colgate',
-            total: -80,
-            results: {
-                contra_la_explotacion_infantil: [
-                    { variable: 'grado_de_explotación_infantil', optionSelected: '', score: 0 },
-                ],
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: 'complicidad indirecta', score: -80 },
-                ],
-                contra_la_explotación_laboral: [
-                    { variable: 'presencia_de_trabajo_forzoso', optionSelected: '', score: 0 },
-                ],
-                responsabilidad_en_el_manejo_de_datos: [
-                    { variable: 'Falta_de_Proporcionalidad_y_Necesidad', optionSelected: '', score: 0 },
-                    { variable: 'Ausencia_de_Consentimiento', optionSelected: '', score: 0 },
-                    { variable: 'Deficiencias_de_Seguridad', optionSelected: '', score: 0 },
-                    { variable: 'Uso_Opaco_y_Falta_de_Transparencia', optionSelected: '', score: 0 },
-                    { variable: 'Incumplimiento_Normativo', optionSelected: '', score: 0 },
-                ],
-            },
-        },
-        /*{
-            idMarca: 810,
-            nameEmpresa: 'new',
-            total: 0,
-            results: {
-                contra_la_explotacion_infantil: [
-                    { variable: 'grado_de_explotación_infantil', optionSelected: '', score: 0 },
-                ],
-                contra_el_genocidio: [
-                    { variable: 'responsabilidad_belica_empresarial', optionSelected: '', score: 0 },
-                ],
-                contra_la_explotación_laboral: [
-                    { variable: 'presencia_de_trabajo_forzoso', optionSelected: '', score: 0 },
-                ],
-                responsabilidad_en_el_manejo_de_datos: [
-                    { variable: 'Falta_de_Proporcionalidad_y_Necesidad', optionSelected: '', score: 0 },
-                    { variable: 'Ausencia_de_Consentimiento', optionSelected: '', score: 0 },
-                    { variable: 'Deficiencias_de_Seguridad', optionSelected: '', score: 0 },
-                    { variable: 'Uso_Opaco_y_Falta_de_Transparencia', optionSelected: '', score: 0 },
-                    { variable: 'Incumplimiento_Normativo', optionSelected: '', score: 0 },
-                ],
-            },
-        }, */
-    ], // el tamaño de la empresa también es un agravante, un multiplicador tanto de lo bueno como de lo malo
     informacion: [ // datos aportados por distintas fuentes
         {},
         {},
         {},
     ], // agregar enlace a los datos...
-    categorias: {
+    categorias: { // id de las marcas pertenecientes a cada categoria
         Todas: [801],
         Alimentos: [804, 801],
         Vestimenta: [805, 801],
@@ -613,6 +556,8 @@ export const initialData: seedData = {
      * ordenar los resultados por puntuación
      */
 }
+
+// agregar la proyeccion de la empresa
 
 // agregar un criterio que puntue a la empresa en función de su sindicato y de las leyes respetadas
 

@@ -33,16 +33,26 @@ export const MainCriterio = ({ criterio }: Props) => {
     // <div className="p-3 rounded-md overflow-hidden fade-in border max-w-300">
     <div className="min-w-full p-2">
 
-      <p className="text-2xl">{ criterio.title }</p>
+      <p className="text-2xl">{criterio.title}</p>
+      <div className="mt-5 mb-2 max-w-60" onClick={handleClick}>
+          <p
+            className="flex justify-center bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all"
+          >
+            {
+              favorite ? 'cancelar suscricpción' : 'suscribir'
+            }
+          </p>
+          <span className="font-bold text-gray-500 text-sm">Suscripciones: {criterio.suscripciones}</span>
+        </div>
 
       <div className="pt-2 flex flex-col max-w-300">
-        <p>{ criterio.description }</p>
+        <p>{criterio.description}</p>
         <p className="mt-3">Variables: </p>
         {
           criterio.variables.map(variable => (
             <div key={variable.variable} className="">
 
-              <hr className="border-t-2 border-blue-gray w-full mt-5 mb-5" /> 
+              <hr className="border-t-2 border-blue-gray w-full mt-5 mb-5" />
 
               {/* <div className="flex flex-row mb-1 ">
                 <p className="bg-gray-800 p-2" >{variable.variable}</p>
@@ -50,22 +60,22 @@ export const MainCriterio = ({ criterio }: Props) => {
               </div> */}
 
               <p className=" rounded-xs">
-                <span className="bg-gray-800 p-2 rounded-xl">{ variable.variable }</span>
+                <span className="bg-gray-800 p-2 rounded-xl">{variable.variable}</span>
                 <span> </span>
-                { variable.description }
+                {variable.description}
               </p>
               <p className="pl-5 mt-3">Opciones: </p>
 
               <div className="pl-5">
-                {variable.options.map(option => (
+                {variable.options?.map(option => (
                   <div key={option.value} className="mb-2">
                     {/* <p className="min-w-40 bg-gray-800 pl-2">{String(option.value)}: {option.score}</p>
                     <p className="bg-amber-800 pl-2">{option.description}</p> */}
 
                     <p className="bg-amber-800 pt-1 pl-1 pr-1 rounded-xs">
-                      <span className="min-w-40 bg-gray-800 pt-1 pl-1 pr-1 rounded-xl">{ String(option.value) }: { option.score }</span>
+                      <span className="min-w-40 bg-gray-800 pt-1 pl-1 pr-1 rounded-xl">{String(option.value)}: {option.score}</span>
                       <span> </span>
-                      { option.description }
+                      {option.description}
                     </p>
                   </div>
                 ))}
@@ -73,17 +83,17 @@ export const MainCriterio = ({ criterio }: Props) => {
             </div>
           ))
         }
-        <hr className="border-t-2 border-gray-500 w-full mt-5 mb-5" /> 
+        <hr className="border-t-2 border-gray-500 w-full mt-5 mb-5" />
 
         <div className="mt-5 mb-2 max-w-60" onClick={handleClick}>
-        <p 
-          className="flex justify-center bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all"
-        >
-          { 
-            favorite ? 'cancelar suscricpción' : 'suscribir' 
-          }
-        </p>
-        <span className="font-bold text-gray-500 text-sm">Suscripciones: {criterio.suscripciones}</span>
+          <p
+            className="flex justify-center bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all"
+          >
+            {
+              favorite ? 'cancelar suscricpción' : 'suscribir'
+            }
+          </p>
+          <span className="font-bold text-gray-500 text-sm">Suscripciones: {criterio.suscripciones}</span>
         </div>
         <p>ir a la discusión en discord</p>
         { /* 
@@ -93,15 +103,15 @@ export const MainCriterio = ({ criterio }: Props) => {
           */ }
 
 
-        
+
       </div>
-      
+
       <div className="hidden">
-      <p>tareas:</p>
-      <p>probemos separar los textos con cuadriculas</p>
-      <p>corregir opciones de criterios: debe haber al menos una opcion que no reste puntos</p>
+        <p>tareas:</p>
+        <p>probemos separar los textos con cuadriculas</p>
+        <p>corregir opciones de criterios: debe haber al menos una opcion que no reste puntos</p>
       </div>
-      
+
     </div>
   )
 }

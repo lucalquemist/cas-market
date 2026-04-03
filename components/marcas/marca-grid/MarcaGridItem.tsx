@@ -1,28 +1,40 @@
 'use client';
 
 // import { Marca } from "@/interfaces";
-import { MarcaResultados } from "@/interfaces";
+import { Marca } from "@/interfaces";
 // import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
   // marca: Marca;
-  marca: MarcaResultados;
+  marca: Marca;
 }
 
 export const MarcaGridItem = ({ marca }: Props) => {
-  
+
+  const { total, ...rest } = marca.score;
+
   return (
     <div className="p-2 rounded-md overflow-hidden fade-in border hover:text-blue-600">
       {/*flex justify-between p-2 rounded-md overflow-hidden fade-in border hover:text-blue-600 */}
       {/*grid grid-cols-2 sm:grid-cols-3 gap-10 mb-10 */}
-      
-      <Link className="flex whitespace-nowrap" href={ `/marca/${ marca.name }`}>
+
+      <Link className="flex whitespace-nowrap" href={`/marca/${marca.name}`}>
         <h2>{marca.name}</h2>
-          <div className="w-full"></div>
-        <h2>Total: {marca.totalScore}</h2>
+        <div className="w-full"></div>
+        <h2>Total: {marca.score['total']}</h2>
       </Link>
-      {Object.entries(marca.sections).map(([section, score]) => (
+
+
+      {Object.entries(rest).map(([section, score]) => (
+        <div key={section} className="flex">
+          <p>{section}:</p>
+          <div className="w-full"></div>
+          <p>{Number(score)}</p>
+        </div>
+      ))}
+
+      {/* {Object.entries(marca.sections).map(([section, score]) => (
         <div key={section} className="flex">
           <p >
             {section}: 
@@ -30,14 +42,12 @@ export const MarcaGridItem = ({ marca }: Props) => {
           <div className="w-full"></div>
           <p> {Number(score)} </p>
         </div>
-        
-        
-      ))}
-      
+      ))} */}
+
     </div>
   )
 
-} 
+}
 
 /* <span className="font-bold text-gray-500 text-sm">Suscripciones: { criterio.suscripciones }</span> */
 

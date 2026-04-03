@@ -11,17 +11,30 @@ export interface Criterio {
     variables: Variable[];
 }
 
-interface Variable {
+export interface Variable {
     variable: string;
-    description: string;
-    options: Option[];
+    description?: string;
+    section?: string;
+    options?: Option[];
 }
 
-interface Option {
-    value: any;
-    score: number;
-    description: string;
+export interface Option {
+    value?: any;
+    score?: number;
+    description?: string;
 }
+
+// esta interface es para las secciones en las que guardamos los criterios
+export interface Sections {
+    responsabilidad_en_el_manejo_de_datos?: Variable[];
+    responsabilidad_belica?: Variable[];
+    responsabilidad_con_animales?: Variable[];
+    responsabilidad_laboral?: Variable[];
+}
+
+
+
+
 
 /*export interface Criterio {
     // id
