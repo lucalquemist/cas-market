@@ -411,7 +411,7 @@ export const initialData: seedData = {
         {
             id: 804,
             name: 'Nestlé', // explotación y genocidio
-            slug: 'Nestlé',
+            slug: 'Nestle',
             category: 'Alimentos',
             score: {
                 total: 0,

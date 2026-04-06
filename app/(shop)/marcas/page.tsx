@@ -7,6 +7,7 @@ import {
     Criterio, Sections, Variable, Option,
     Marcas, Marca, Secciones, Variables
 } from '@/interfaces';
+import { useEffect } from "react";
 
 type SectionsMap = {
     [section: string]: {
@@ -129,7 +130,9 @@ export default function MarcasPage() {
     console.log('resultado marcas: ');
     console.log(marcasResultados);
     
-    updateMarcasScore(marcasResultados);
+    useEffect(() => { // https://stackoverflow.com/questions/62336340/cannot-update-a-component-while-rendering-a-different-component-warning
+        updateMarcasScore(marcasResultados);
+    }, []);
 
     return (
         <MarcaGrid

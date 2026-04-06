@@ -46,9 +46,7 @@ export const MainMarca = ({ marca }: Props) => {
 
     return (
         <div>
-            <p>{marca2.name}</p>
-            <hr className="mt-3 mb-3" />
-            <p>Categoria: {marca2.category}</p>
+            <p>{marca2.name} - {marca2.category}</p>
             <hr className="mt-3 mb-3" />
             {Object.entries(marca2.sections).map(
                 ([section, variables]: [string, Variables | undefined]) => {
@@ -59,7 +57,7 @@ export const MainMarca = ({ marca }: Props) => {
                             <h3>{section}</h3>
 
                             {Object.entries(variables).map(([key, value]) => (
-                                <p key={key}>
+                                <p key={key} className="pl-3">
                                     {key}: {value.valor} ({value.score})
                                 </p>
                             ))}
@@ -67,7 +65,12 @@ export const MainMarca = ({ marca }: Props) => {
                     );
                 }
             )}
+            <p>Total: {marca2.score['total']}</p>
             <hr className="mt-3 mb-3" />
         </div>
     )
 }
+/**
+ * * la marca debe tener un subtotal de cada area
+ * * {marca2.score[section]}
+ */
