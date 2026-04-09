@@ -217,12 +217,57 @@ export const initialData: seedData = {
                     section: 'responsabilidad_con_animales',
                     options: [
                         { value: 'subumbral', score: 0, description: 'Procedimientos que causan menos dolor o sufrimiento que una inyección de aguja, con un impacto mínimo o nulo en el bienestar del animal' },
-                        { value: 'leve', score: -1, description: 'Procedimientos que causan un dolor o sufrimiento leve o a corto plazo, y que no afectan de forma significativa el bienestar o el estado general del animal' },
-                        { value: 'moderado', score: -5, description: 'Procedimientos que causan un dolor, sufrimiento o angustia de intensidad moderada, o que pueden afectar moderadamente el bienestar o el estado general del animal' },
-                        { value: 'severo', score: -20, description: 'Procedimientos que causan un dolor, sufrimiento o angustia intensos, o que pueden afectar severamente el bienestar o el estado general del animal' },
+                        { value: 'leve', score: -3, description: 'Procedimientos que causan un dolor o sufrimiento leve o a corto plazo, y que no afectan de forma significativa el bienestar o el estado general del animal' },
+                        { value: 'moderado', score: -10, description: 'Procedimientos que causan un dolor, sufrimiento o angustia de intensidad moderada, o que pueden afectar moderadamente el bienestar o el estado general del animal' },
+                        { value: 'severo', score: -35, description: 'Procedimientos que causan un dolor, sufrimiento o angustia intensos, o que pueden afectar severamente el bienestar o el estado general del animal' },
                         { value: 'terminal', score: -50, description: ' Procedimientos que se realizan enteramente bajo anestesia general y sin que el animal recupere la consciencia' },
                     ],
-                }
+                },
+                {
+                    variable: 'confinamiento_extremo_y_hacinamiento',
+                    description: 'Uso de jaulas en batería para gallinas, jaulas de gestación para cerdas y corrales masificados, limitando drásticamente el movimiento natural',
+                    section: 'responsabilidad_con_animales',
+                    options: [
+                        { value: 'verdadero', score: -20, description: '' },
+                        { value: 'falso', score: 0, description: '' }
+                    ],
+                },
+                {
+                    variable: 'mutilaciones_sin_anestesia',
+                    description: 'Prácticas dolorosas rutinarias como el corte de picos, cola, orejas o castración, realizadas sin alivio del dolor para prevenir lesiones por frustración',
+                    section: 'responsabilidad_con_animales',
+                    options: [
+                        { value: 'verdadero', score: -20, description: '' },
+                        { value: 'falso', score: 0, description: '' }
+                    ],
+                },
+                {
+                    variable: 'sobreexplotación_fisiologica',
+                    description: 'Cría selectiva y uso de hormonas/fármacos para un crecimiento antinatural y rápido, causando fallos orgánicos, cojeras y problemas óseos',
+                    section: 'responsabilidad_con_animales',
+                    options: [
+                        { value: 'verdadero', score: -20, description: '' },
+                        { value: 'falso', score: 0, description: '' }
+                    ],
+                },
+                {
+                    variable: 'negligencia_sistemica_en_los_cuidados',
+                    description: 'Falta de atención veterinaria individual, iluminación artificial continua y privación de agua/alimento en transportes',
+                    section: 'responsabilidad_con_animales',
+                    options: [
+                        { value: 'verdadero', score: -20, description: '' },
+                        { value: 'falso', score: 0, description: '' }
+                    ],
+                },
+                {
+                    variable: 'maltrato_fisico_directo',
+                    description: 'Falta de atención veterinaria individual, iluminación artificial continua y privación de agua/alimento en transportes',
+                    section: 'responsabilidad_con_animales',
+                    options: [
+                        { value: 'verdadero', score: -20, description: '' },
+                        { value: 'falso', score: 0, description: '' }
+                    ],
+                },
             ],
         },
         {
@@ -593,6 +638,9 @@ export const initialData: seedData = {
                         // construyo una planta en palestina ocupada ilegalmente
                     },
                 },
+                // impacto ambiental y greenwashingImpacto Ambiental y Greenwashing: 
+                // A pesar de sus compromisos, estudios señalan a la compañía como uno de los mayores contaminantes de plástico a nivel global. 
+                // Se le acusa de realizar greenwashing al no cumplir con metas de envases reutilizables y depender de plásticos de un solo uso.
             },
         },
         {
