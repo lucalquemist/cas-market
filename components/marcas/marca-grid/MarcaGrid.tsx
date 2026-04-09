@@ -37,10 +37,14 @@ export const MarcaGrid = ({ marcasResultados }: Props) => {
 
   // creamos otro objeto igual al de resultados pero solo con los de la categoria
   let marcasResultados2: Marcas = {}
-  for (const marcares of categorias[catSel]) {
-    marcasResultados2[marcares] = marcasResultados[marcares]
-  }
 
+  if (catSel === 'Todas') {
+    marcasResultados2 = marcasResultados
+  } else {
+    for (const marcares of categorias[catSel]) {
+      marcasResultados2[marcares] = marcasResultados[marcares]
+    }
+  }
 
   return (
     <div>

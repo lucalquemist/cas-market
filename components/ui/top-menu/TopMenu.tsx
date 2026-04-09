@@ -27,14 +27,14 @@ export const TopMenu = () => {
         <div className="">
           <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-100" href="/criterios">Criterios</Link>
           <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-100" href="/marcas">Marcas</Link>
-          <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-100" href="/">FAQ</Link>
+          {/* <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-100" href="/">FAQ</Link> */}
         </div>
 
         { /* Search, Cart, Menu */ }
         <div className="flex items-center">
           
           <Link href="/search" className="mx-2">
-            <IoSearchOutline className="w-5 h-5" />
+            {/* <IoSearchOutline className="w-5 h-5" /> */}
           </Link>
           
           {/* <Link href="/cart" className="mx-2">

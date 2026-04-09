@@ -23,7 +23,7 @@ export const MarcaTopMenu = () => {
             <div
               key={cat}
               onClick={() => handleClick(cat)}
-              className={` cursor-pointer
+              className={` cursor-pointer mb-2
                 ${catSel === cat
                   ? 'border-b-4 border-indigo-600'
                   : 'pb-1'}

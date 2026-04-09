@@ -68,12 +68,12 @@ export const MainCriterio = ({ criterio }: Props) => {
 
               <div className="pl-5">
                 {variable.options?.map(option => (
-                  <div key={option.value} className="mb-2">
+                  <div key={option.value} className="mb-2 flex w-fit">
                     {/* <p className="min-w-40 bg-gray-800 pl-2">{String(option.value)}: {option.score}</p>
                     <p className="bg-amber-800 pl-2">{option.description}</p> */}
 
-                    <p className="bg-amber-800 pt-1 pl-1 pr-1 rounded-xs">
-                      <span className="min-w-40 bg-gray-800 pt-1 pl-1 pr-1 rounded-xl">{String(option.value)}: {option.score}</span>
+                    <p className="bg-amber-800 rounded-xs pt-1 pl-1 pr-1 pb-1">
+                      <span className="min-w-40 bg-gray-800 pt-1 pl-1 pr-1 pb-1 rounded-xs">{String(option.value)}: {option.score}</span>
                       <span> </span>
                       {option.description}
                     </p>

@@ -33,7 +33,7 @@ export const CriterioGrid = ({ criterios }: Props) => {
       <hr className="border-t-4 border-blue-500 w-full pb-10" />
       <p className="mb-3">Todos los criterios:</p>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
         {
           criterios.map(criterio => (
             <CriterioGridItem

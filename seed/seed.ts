@@ -227,8 +227,8 @@ export const initialData: seedData = {
         },
         {
             id: 103,
-            title: 'contra el genocidio',
-            slug: 'contra_el_genocidio',
+            title: 'contra las guerras',
+            slug: 'contra_las_guerras',
             section: 'responsabilidad_belica',
             description: 'este criterio indica si una empresa o marca o país participa de forma directa o en distintos niveles indirectamente en crimenes de guerra',
             suscripciones: 1234567,
@@ -260,10 +260,47 @@ export const initialData: seedData = {
                     description: 'se constató que la empresa tiene trabajadores en condiciones de trabajo forzoso(esclavitud)',
                     section: 'responsabilidad_laboral',
                     options: [
-                        { value: true, score: -100, description: '' }
+                        { value: true, score: -100, description: '' },
+                        { value: false, score: 0, description: '' }
                     ]
-                }
-            ] // agregar mas variables
+                },
+                {
+                    variable: 'condiciones_insalubres_e_inseguras',
+                    description: 'trabajar en lugares peligrosos sin equipo de protección, poninedo en riesgo la integridad física o la vida',
+                    section: 'responsabilidad_laboral',
+                    options: [
+                        { value: true, score: -60, description: '' },
+                        { value: false, score: 0, description: '' }
+                    ]
+                },
+                {
+                    variable: 'jornadas_excesivas_y_falta_de_descansos',
+                    description: 'imponer horarios de trabajo extremos sin dias de descanso, vacaciones o tiempo para comer',
+                    section: 'responsabilidad_laboral',
+                    options: [
+                        { value: true, score: -40, description: '' },
+                        { value: false, score: 0, description: '' }
+                    ]
+                },
+                {
+                    variable: 'salarios_injustos_o_impagos',
+                    description: 'pagar sumas irrisorias, retener el sueldo(total o parcialmente) o el cobro forzoso de deudas por pasajes, vivienda o comida, creando una dependencia impagable',
+                    section: 'responsabilidad_laboral',
+                    options: [
+                        { value: true, score: -40, description: '' },
+                        { value: false, score: 0, description: '' }
+                    ]
+                },
+                {
+                    variable: 'aislamiento_y_violencia',
+                    description: 'retención del trabajador en el lugar de trabajo, violencia física, psicologica o sexual',
+                    section: 'responsabilidad_laboral',
+                    options: [
+                        { value: true, score: -70, description: '' },
+                        { value: false, score: 0, description: '' }
+                    ]
+                },
+            ]
         },
         {
             id: 105,
@@ -334,7 +371,30 @@ export const initialData: seedData = {
             score: {
                 total: 0,
             },
-            sections: {},
+            sections: {
+                responsabilidad_en_el_manejo_de_datos: {
+                    Falta_de_Proporcionalidad_y_Necesidad: {
+                        valor: true,
+                        score: 0
+                    },
+                    Ausencia_de_Consentimiento: {
+                        valor: true,
+                        score: 0
+                    },
+                    Deficiencias_de_Seguridad: {
+                        valor: true,
+                        score: 0
+                    },
+                    Uso_Opaco_y_Falta_de_Transparencia: {
+                        valor: true,
+                        score: 0
+                    },
+                    Incumplimiento_Normativo: {
+                        valor: true,
+                        score: 0
+                    },
+                },
+            },
         },
         {
             id: 802,
@@ -439,7 +499,22 @@ export const initialData: seedData = {
             score: {
                 total: 0,
             },
-            sections: {},
+            sections: {
+                responsabilidad_laboral: {
+                    condiciones_insalubres_e_inseguras: {
+                        valor: true,
+                        score: 0
+                    },
+                    jornadas_excesivas_y_falta_de_descansos: {
+                        valor: true,
+                        score: 0
+                    },
+                    salarios_injustos_o_impagos: {
+                        valor: true,
+                        score: 0
+                    }
+                }
+            },
         },
         {
             id: 806,
@@ -453,8 +528,8 @@ export const initialData: seedData = {
         },
         {
             id: 807,
-            name: 'Iphone', // esclavitud, trabajo forzoso
-            slug: 'Iphone',
+            name: 'Apple', // esclavitud, trabajo forzoso
+            slug: 'Apple',
             category: 'Electrónicos',
             score: {
                 total: 0,
@@ -487,7 +562,7 @@ export const initialData: seedData = {
         },
         {
             id: 809,
-            name: 'Colgate', // animales y genocidio
+            name: 'Colgate',
             slug: 'Colgate',
             category: 'Higiene personal',
             score: {
@@ -504,6 +579,24 @@ export const initialData: seedData = {
         },
         {
             id: 810,
+            name: 'Coca-Cola', // podriamos tener una descripcin en la que indicamos de que manera la empresa incurre en cada caso
+            slug: 'Coca_Cola',
+            category: 'Alimentos',
+            score: {
+                total: 0,
+            },
+            sections: {
+                responsabilidad_belica: {
+                    responsabilidad_belica_empresarial: {
+                        valor: 'complicidad indirecta',
+                        score: 0
+                        // construyo una planta en palestina ocupada ilegalmente
+                    },
+                },
+            },
+        },
+        {
+            id: 811,
             name: 'new', //
             slug: 'new',
             category: '',
@@ -512,7 +605,6 @@ export const initialData: seedData = {
             },
             sections: {},
         },
-        // ver casos en las apps instaladas en el cel
     ],
     informacion: [ // datos aportados por distintas fuentes
         {},
@@ -521,13 +613,13 @@ export const initialData: seedData = {
     ], // agregar enlace a los datos...
     categorias: { // id de las marcas pertenecientes a cada categoria
         Todas: [801],
-        Alimentos: [804, 801],
-        Vestimenta: [805, 801],
-        HigienePersonal: [809, 801],
+        Alimentos: [804, 810],
+        Vestimenta: [805],
+        HigienePersonal: [809],
         Software: [801, 802, 803, 808],
-        Electronicos: [806, 807, 801],
-        Servicios: [801, 801],
-        Vehiculos: [801, 801],
+        Electronicos: [806, 807],
+        Servicios: [801],
+        Vehiculos: [801],
     },
     faqs: [
         {
