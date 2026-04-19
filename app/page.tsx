@@ -1,6 +1,7 @@
 import { FaqList } from '@/components';
 import { initialData } from '@/seed/seed';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 interface SeedFAQ {
     id: number;
@@ -9,6 +10,8 @@ interface SeedFAQ {
 }
 
 export default function Home() {
+
+  redirect('/criterios');
 
   const faqs = initialData.faqs as SeedFAQ[];
   console.log(faqs);

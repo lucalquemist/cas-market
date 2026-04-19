@@ -45,7 +45,7 @@ export const MainMarca = ({ marca }: Props) => {
     const marca2 = useMarcaStore(store => store.marcasScore[marca.id]) // necesito buscarla por su id
 
     return (
-        <div>
+        <div className="ml-3">
             <p>{marca2.name} - {marca2.category}</p>
             <hr className="mt-3 mb-3" />
             {Object.entries(marca2.sections).map(
@@ -71,6 +71,15 @@ export const MainMarca = ({ marca }: Props) => {
     )
 }
 /**
- * * la marca debe tener un subtotal de cada area
+ * * agregar un enlace a la fuente
+ * * también agregar una lista desplegable para elegir las distintas fuentes
+ * * podria ser una i despues de la nota para desplegar el detalle de la variable
+ * * la marca debe tener un subtotal de cada area¿
+ * * 
+ * * hacemos un algoritmo y preguntamos por la fuente del proximo dato, si es diferente o inexistente entonces publicamos el enlace actual
+ * *
+ * *
+ * *
+ * *
  * * {marca2.score[section]}
  */

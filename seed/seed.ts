@@ -12,6 +12,9 @@ interface SeedCriterio {
     slug: string;
     section: string;
     description: string;
+    implicado: string; // nuevo, "se aplica a: empresas"
+    tipo: string; // nuevo,
+    ratio: number; // nuevo, 1
     suscrito: boolean;
     suscripciones: number;
     variables: SeedVariable[];
@@ -39,10 +42,16 @@ export interface SeedMarca {
     name: string;
     slug: string;
     category: string;
+    etapas: SeedEtapa[];
     score: {
         [key: string]: number;
     },
     sections: SeedSecciones;
+}
+
+export interface SeedEtapa {
+    pais: string;
+    participacion: number;
 }
 
 export interface SeedSecciones {
@@ -56,8 +65,21 @@ export interface SeedVariables {
     [key: string]: {
         valor: any,
         score: number,
+        fuente: string,
     }
 }
+
+export interface SeedPais {
+    nombre: string;
+    score: {
+        [key: string]: number;
+    },
+    sections: {
+        [key: string]: SeedVariables
+    }
+}
+
+
 /*interface SeedMarca {
     id: number;
     name: string;
@@ -99,6 +121,7 @@ interface seedData {
     variables: SeedInformation[],
     criterios: SeedCriterio[],
     marcas: SeedMarca[],
+    paises: SeedPais[],
     informacion: SeedInfo[],
     categorias: {
         Todas: number[],
@@ -178,12 +201,16 @@ export const initialData: seedData = {
 
     ],
     criterios: [
+        //* criterios de empresas
         {
             id: 101,
             title: 'contra la explotación infantil',
             slug: 'contra_la_explotacion_infantil',
             section: 'responsabilidad_laboral',
             description: 'este criterio clasifica a las empresas según el grado de explotación infantil en el que estén involucradas',
+            implicado: 'empresas',
+            tipo: 'boicot',
+            ratio: 1,
             suscrito: true,
             suscripciones: 1234567,
             variables: [
@@ -208,6 +235,9 @@ export const initialData: seedData = {
             slug: 'contra_el_maltrato_animal',
             section: 'responsabilidad_con_animales',
             description: 'este criterio puntúa a las marcas según el maltrato ejercido contra los animales en cualquiera de las fases de testeo y/o elaboración',
+            implicado: 'empresas',
+            tipo: 'boicot',
+            ratio: 1,
             suscrito: false,
             suscripciones: 1234567,
             variables: [
@@ -276,6 +306,9 @@ export const initialData: seedData = {
             slug: 'contra_las_guerras',
             section: 'responsabilidad_belica',
             description: 'este criterio indica si una empresa o marca o país participa de forma directa o en distintos niveles indirectamente en crimenes de guerra',
+            implicado: 'empresas',
+            tipo: 'boicot',
+            ratio: 1,
             suscripciones: 1234567,
             suscrito: false,
             variables: [
@@ -297,6 +330,9 @@ export const initialData: seedData = {
             slug: 'contra_la_explotacion_laboral',
             section: 'responsabilidad_laboral',
             description: 'analiza variables relacionadas a la explotación de los trabajadores',
+            implicado: 'empresas',
+            tipo: 'boicot',
+            ratio: 1,
             suscrito: false,
             suscripciones: 1234567,
             variables: [
@@ -353,6 +389,9 @@ export const initialData: seedData = {
             slug: 'responsabilidad_en_el_manejo_de_datos',
             section: 'responsabilidad_en_el_manejo_de_datos',
             description: 'Controla la responsabilidad de las redes sociales y otros sitios/aplicaciones en el manejo de los datos de los usuarios',
+            implicado: 'empresas',
+            tipo: 'boicot',
+            ratio: 1,
             suscrito: false,
             suscripciones: 1234567,
             variables: [
@@ -403,16 +442,152 @@ export const initialData: seedData = {
                 },
             ]
         },
-        // hacer un criterio ecologico, podemos agregar el atributo del greenwalling para penalizar esta conducta
-        // hacer: una regla en la que el resultado sea una multiplicacion: score = value * -20
+        //* criterios de paises
+        {
+            id: 106,
+            title: 'Evasion fiscal y secreto financiero',
+            slug: 'Evasion_fiscal_y_secreto_financiero',
+            section: 'Economia',
+            description: 'Este criterio busca penalizar (restando puntos) a los paises que faciliten la evasión fiscal y el secreto financiero, se base en la asignación de puntos basados en los datos de la Tax Justice Network. La Red por Justicia Fiscal (Tax Justice Network o TJN) es una coalición internacional independiente de investigadores y activistas que lucha contra la evasión fiscal, la competencia fiscal desleal y los paraísos fiscales. Busca promover sistemas tributarios más justos y transparentes para reducir la desigualdad y combatir los flujos financieros ilícitos. La Red de Justicia Fiscal cree que nuestros sistemas tributarios y financieros son nuestras herramientas más poderosas para crear una sociedad justa que dé igual importancia a las necesidades de todos. Sin embargo, bajo la presión de los gigantes corporativos y los superricos, nuestros gobiernos han programado estos sistemas para priorizar a los más ricos sobre el resto, integrando el secreto financiero y los paraísos fiscales en el núcleo de nuestra economía global. Esto alimenta la desigualdad, fomenta la corrupción y socava la democracia. Trabajamos para reparar estas injusticias inspirando y capacitando a personas y gobiernos para que reprogramen sus sistemas tributarios y financieros.',
+            implicado: 'Paises',
+            tipo: 'boicot',
+            ratio: 1,
+            suscrito: false,
+            suscripciones: 1234567,
+            variables: [
+                //* facilitadores del abuso fiscal corporativo
+                {
+                    variable: 'puntaje_de_guarida_fiscal', //https://cthi.taxjustice.net/es/full-list
+                    description: 'mide el margen que ofrecen las leyes y normativas de la jurisdicción para el abuso fiscal corporativo, ya sea intencionado o no',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -1', score: 0, description: 'Los puntajes van del 0 (sin margen para el abuso fiscal) al 100 (margen ilimitado para el abuso fiscal) y el puntaje del criterio se calcula multiplicando el valor de este indicador por -1' },
+                    ]
+                },
+                {
+                    variable: 'GSW_de_abuso_fiscal',
+                    description: 'mide cuanta de la actividad financiera realizada por empresas multinacionales de todo el mundo entra o sale de la jurisdicción. Basado en datos del FMI sobre inversión extranjera directa',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -10', score: 0, description: 'el valor de este indicador es el porcentaje de la actividad mundial en la jusrisdicción y el puntaje del criterio se calcula multiplicando el valor por -10' },
+                    ]
+                },
+                {
+                    variable: 'valor_de_IGFC',
+                    description: 'combina el puntaje de guarida fiscal y el peso a nivel global para determinar la importancia de la jurisdicción a la hora de permitir el abuso fiscal corporativo en todo el mundo. ',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -0.01', score: 0, description: 'la puntuación del criterio se calcula dividiendo el valor del indicador entre -100' },
+                    ]
+                },
+                {
+                    variable: 'cuota_CTHI',
+                    description: 'el CTHI (índice de guaridas fiscales corporativas) mide que porcentaje de todo el abuso fiscal corporativo habilitado en todo el mundo es responsabilidad de la jurisdicción', 
+                    section: 'Economia',
+                    options: [
+                        { value: '* -10', score: 0, description: 'la puntuación del criterio se calcula multiplicando el valor del indicador por -10' }, //* resolver: hacer que esto sea una calculadora, es score = value * -10
+                    ]
+                },
+                //* facilitadores del secreto financiero
+                {
+                    variable: 'Puntaje_de_opacidad', //https://fsi.taxjustice.net/es/full-list/#scoring_id=268
+                    description: 'evalúa qué tanto permiten las leyes y regulaciones de un país el secreto financiero',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -1', score: 0, description: 'Un puntaje de 100 indica opacidad total y 0 transparencia total, la puntuación del criterio se calcula multiplicando el valor de este indicador por -1' },
+                    ]
+                },
+                {
+                    variable: 'GSW_de_secreto_financiero',
+                    description: 'La cuota de mercado de una jurisdicción en los servicios financieros internacionales, basada en datos del Fondo Monetario Internacional (FMI)',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -10', score: 0, description: 'el punaje se calcula multiplicando el valor del indicador por -10' },
+                    ]
+                },
+                {
+                    variable: 'valor_de_FSI',
+                    description: 'el Índice de Secreto Financiero evalúa la opacidad financiera de las jurisdicciones (países/territorios) combinando dos factores: el "puntaje de secreto" (qué tan estrictas son sus leyes) y la escala de sus actividades financieras internacionales ',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -0.1', score: 0, description: 'el puntaje se calcula dividiendo el valor del indicador entre -10' },
+                    ]
+                },
+                {
+                    variable: 'porcenraje_de_FSI',
+                    description: 'El porcentaje de FSI (Cuota FSI) en el Índice de Secreto Financiero de la Tax Justice Network mide qué parte del secreto financiero mundial total es responsabilidad de una jurisdicción específica. Se calcula dividiendo el valor FSI de la jurisdicción por la suma total de los valores FSI de todas las jurisdicciones, determinando su nivel de opacidad financiera a nivel global',
+                    section: 'Economia',
+                    options: [
+                        { value: '* -20', score: 0, description: 'el puntaje se determina multiplicando el valor por -20' },
+                    ]
+                },
+            ],
+        },
+        {
+            id: 107,
+            title: 'riesgo de LA y FT', //https://index.baselgovernance.org/ranking
+            slug: 'riesgo_de_lavado_de_activos_y_financiamiento_del_terrorismo',
+            section: 'economia',
+            description: `este criterio puntúa a las empresas según el riesgo de lavado de activos y financiamiento del terrorismo basado en el indice Basel AML, es una clasificación (ranking) anual e independiente que mide el riesgo de lavado de activos y financiamiento del terrorismo (LA/FT) en los países.\n
+                            Desarrollado por el Basel Institute on Governance, evalúa jurisdicciones basándose en 17-18 fuentes públicas para proporcionar una puntuación de riesgo global.\n
+                            Objetivo: Ayudar a instituciones financieras y empresas a realizar evaluaciones de riesgo geográfico y debida diligencia.\n
+                            Dominios de evaluación: Analiza la calidad del marco normativo ALA/CFT (Antilavado de Activos/Combate del Financiamiento del Terrorismo), corrupción, transparencia financiera, transparencia pública y riesgos legales/políticos.\n
+                            Fuentes de datos: Utiliza información del Grupo de Acción Financiera (GAFI), Transparencia Internacional, el Banco Mundial y el Foro Económico Mundial.\n
+                            No es una medición directa: No mide la cantidad real de dinero lavado, sino la vulnerabilidad del país y la ineficacia de sus sistemas de control.\n
+                            Puntuación: Va del 0 (riesgo bajo) al 10 (riesgo alto).\n
+                            Es considerado un mapa de riesgo esencial para los sujetos obligados en la lucha contra los delitos financieros.`,
+            implicado: 'Paises',
+            tipo: 'boicot',
+            ratio: 1,
+            suscrito: false,
+            suscripciones: 1234567,
+            variables: [
+            {
+                    variable: 'Indice_Basel_AML',
+                    description: 'El indice Basel AML es una clasificación (ranking) anual e independiente que mide el riesgo de lavado de activos y financiamiento del terrorismo (LA/FT) en los países',
+                    section: 'economia',
+                    options: [
+                        { value: '* -10', score: 0, description: 'el valor de esta variable va del 0 (riesgo bajo) al 10 (riesgo alto) y el puntaje del criterio se obtiene al multiplicarlo por -10' },
+                    ]
+                },
+            ],
+        },
+        /*
+        {
+            id: 107,
+            title: '',
+            slug: '',
+            section: '',
+            description: '',
+            implicado: '',
+            tipo: '',
+            ratio: 1,
+            suscrito: false,
+            suscripciones: 1234567,
+            variables: [
+            {
+                    variable: '',
+                    description: '',
+                    section: '',
+                    options: [
+                        { value: true, score: 0, description: '' },
+                        { value: false, score: 0, description: '' },
+                    ]
+                },
+            ],
+        },
+        */
 
-    ], // agregar la proyección de la empresa
+    ],
     marcas: [
         {
             id: 801,
             name: 'Meta', // datos y genocidio¿ // agregar atributos: los necesarios, su valor y sus fuentes
             slug: 'Meta',
             category: 'Software',
+            etapas: [
+                { pais: 'USA', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -420,23 +595,28 @@ export const initialData: seedData = {
                 responsabilidad_en_el_manejo_de_datos: {
                     Falta_de_Proporcionalidad_y_Necesidad: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Ausencia_de_Consentimiento: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Deficiencias_de_Seguridad: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Uso_Opaco_y_Falta_de_Transparencia: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Incumplimiento_Normativo: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -446,6 +626,9 @@ export const initialData: seedData = {
             name: 'Telegram',
             slug: 'Telegram',
             category: 'Software',
+            etapas: [
+                { pais: 'EAU', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -453,23 +636,28 @@ export const initialData: seedData = {
                 responsabilidad_en_el_manejo_de_datos: {
                     Falta_de_Proporcionalidad_y_Necesidad: {
                         valor: false,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Ausencia_de_Consentimiento: {
                         valor: false,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Deficiencias_de_Seguridad: {
                         valor: false,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Uso_Opaco_y_Falta_de_Transparencia: {
                         valor: false,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Incumplimiento_Normativo: {
                         valor: false,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -479,6 +667,9 @@ export const initialData: seedData = {
             name: 'Microsoft',
             slug: 'Microsoft',
             category: 'Software',
+            etapas: [
+                { pais: 'USA', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -486,29 +677,35 @@ export const initialData: seedData = {
                 responsabilidad_en_el_manejo_de_datos: {
                     Falta_de_Proporcionalidad_y_Necesidad: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Ausencia_de_Consentimiento: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Deficiencias_de_Seguridad: {
                         valor: false,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Uso_Opaco_y_Falta_de_Transparencia: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     Incumplimiento_Normativo: {
-                        valor: true,
-                        score: 0
+                        valor: false,
+                        score: 0,
+                        fuente: '',
                     },
                 },
                 responsabilidad_belica: {
                     responsabilidad_belica_empresarial: {
                         valor: 'complicidad directa',
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -518,6 +715,9 @@ export const initialData: seedData = {
             name: 'Nestlé', // explotación y genocidio
             slug: 'Nestle',
             category: 'Alimentos',
+            etapas: [
+                { pais: 'Suiza', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -525,13 +725,15 @@ export const initialData: seedData = {
                 responsabilidad_laboral: {
                     grado_de_explotación_infantil: {
                         valor: 'esclavitud',
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
                 responsabilidad_belica: {
                     responsabilidad_belica_empresarial: {
                         valor: 'complicidad indirecta',
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -539,8 +741,11 @@ export const initialData: seedData = {
         {
             id: 805,
             category: 'vestimenta',
-            name: 'H&M', // explotación laboral y greenwashing
+            name: 'H&M', // contaminación y greenwashing
             slug: 'H&M',
+            etapas: [
+                { pais: 'Suecia', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -548,15 +753,18 @@ export const initialData: seedData = {
                 responsabilidad_laboral: {
                     condiciones_insalubres_e_inseguras: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     jornadas_excesivas_y_falta_de_descansos: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                     salarios_injustos_o_impagos: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     }
                 }
             },
@@ -566,16 +774,43 @@ export const initialData: seedData = {
             name: 'Fairphone', // único productor que certifica 0 explotación laboral
             slug: 'Fairphone',
             category: 'Electrónicos',
+            etapas: [
+                { pais: 'Netherlands', participacion: 1 }, //desarrollo
+                { pais: 'Portugal', participacion: 1 }, //software
+                { pais: 'RDC', participacion: 3 }, //minerales
+                { pais: 'China', participacion: 2 }, //ensamblado
+                { pais: 'Otros', participacion: 3 }, //componentes electrónicos
+            ],
             score: {
                 total: 0,
             },
             sections: {},
+            // Fairphone es el primer teléfono modular y ético del mundo, tiene un diseño que permite que uno mismo pueda repararlo y cambiar piezas.
+            // De esta forma fomentan la reutilización de dispositivos electrónicos al mismo tiempo que investigan en formas de reciclado y reducción de residuos.
         },
         {
             id: 807,
             name: 'Apple', // esclavitud, trabajo forzoso
             slug: 'Apple',
             category: 'Electrónicos',
+            etapas: [
+                { pais: 'South Korea', participacion: 3 }, // pantallas, bateria, memoria
+                { pais: 'Japon', participacion: 3 }, // camara, bateria, memoria
+                { pais: 'China', participacion: 2 }, // bateria, ensamblaje
+                { pais: 'India', participacion: 1 }, // ensamblaje
+                { pais: 'Taiwan', participacion: 1 }, // procesadores
+                { pais: 'USA', participacion: 2 }, // memoria, vidrio
+                { pais: 'Suiza', participacion: 1 }, // sensores
+                { pais: 'Italia', participacion: 1 }, // sensores
+                { pais: 'Chile', participacion: 1 }, // materiales
+                { pais: 'Argentina', participacion: 1 }, // materiales
+                { pais: 'Peru', participacion: 1 }, // materiales
+                { pais: 'Brasil', participacion: 1 }, // materiales
+                { pais: 'España', participacion: 1 }, // materiales
+                { pais: 'Tailandia', participacion: 1 }, // materiales
+                { pais: 'Indonesia', participacion: 1 }, // materiales
+                { pais: 'Malasia', participacion: 1 }, // materiales
+            ],
             score: {
                 total: 0,
             },
@@ -583,7 +818,8 @@ export const initialData: seedData = {
                 responsabilidad_laboral: {
                     presencia_de_trabajo_forzoso: {
                         valor: true,
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -593,6 +829,9 @@ export const initialData: seedData = {
             name: 'Spotify', // modelo de negocio poco ético
             slug: 'Spotify',
             category: 'Software',
+            etapas: [
+                { pais: 'Suecia', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -600,7 +839,8 @@ export const initialData: seedData = {
                 responsabilidad_belica: {
                     responsabilidad_belica_empresarial: {
                         valor: 'complicidad directa',
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -610,6 +850,15 @@ export const initialData: seedData = {
             name: 'Colgate',
             slug: 'Colgate',
             category: 'Higiene personal',
+            etapas: [
+                { pais: 'Mexico', participacion: 1 },
+                { pais: 'Argentina', participacion: 1 },
+                { pais: 'USA', participacion: 1 },
+                { pais: 'Indonesia', participacion: 1 },
+                { pais: 'China', participacion: 1 },
+                { pais: 'Malasia', participacion: 1 },
+                { pais: 'Francia', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -617,7 +866,8 @@ export const initialData: seedData = {
                 responsabilidad_belica: {
                     responsabilidad_belica_empresarial: {
                         valor: 'complicidad indirecta',
-                        score: 0
+                        score: 0,
+                        fuente: '',
                     },
                 },
             },
@@ -627,6 +877,16 @@ export const initialData: seedData = {
             name: 'Coca-Cola', // podriamos tener una descripcin en la que indicamos de que manera la empresa incurre en cada caso
             slug: 'Coca_Cola',
             category: 'Alimentos',
+            etapas: [
+                { pais: 'USA', participacion: 1 },
+                { pais: 'Brasil', participacion: 1 },
+                { pais: 'China', participacion: 1 },
+                { pais: 'Vietnam', participacion: 1 },
+                { pais: 'Madagascar', participacion: 1 },
+                { pais: 'Francia', participacion: 1 },
+                { pais: 'Alemania', participacion: 1 },
+                { pais: 'Polonia', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
@@ -634,7 +894,8 @@ export const initialData: seedData = {
                 responsabilidad_belica: {
                     responsabilidad_belica_empresarial: {
                         valor: 'complicidad indirecta',
-                        score: 0
+                        score: 0,
+                        fuente: '',
                         // construyo una planta en palestina ocupada ilegalmente
                     },
                 },
@@ -648,11 +909,161 @@ export const initialData: seedData = {
             name: 'new', //
             slug: 'new',
             category: '',
+            etapas: [
+                { pais: '', participacion: 1 },
+            ],
             score: {
                 total: 0,
             },
             sections: {},
         },
+    ],
+    paises: [
+        {
+            nombre: 'USA',
+            score: {
+                total: 0,
+            },
+            sections: {
+                justicia: {
+                    derechos_humanos_fundamentales: { valor: '0.65', score:-35, fuente: 'worldjusticeproject' },
+                },
+                economia: {
+                    //* datos de evasion fiscal y secreto financiero
+                    puntaje_de_guarida_fiscal: { valor: 45, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    GSW_de_abuso_fiscal: { valor: 13.2, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    valor_de_IGFC: { valor: 455, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    cuota_CTHI: { valor: 1.1, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    Puntaje_de_opacidad: { valor: 69, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    GSW_de_secreto_financiero: { valor: 24.54, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    valor_de_FSI: { valor: 2018, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    porcenraje_de_FSI: { valor: 5.66, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
+                    Indice_Basel_AML: { valor: 4.83, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
+                },
+            },
+        },
+        {
+            nombre: 'China',
+            score: {
+                total: 0
+            },
+            sections: {
+                justicia: {
+                    derechos_humanos_fundamentales: { valor: '0.57', score:-43, fuente: 'worldjusticeproject' },
+                },
+                economia: {
+                    //* datos de evasion fiscal y secreto financiero
+                    puntaje_de_guarida_fiscal: { valor: 62, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    GSW_de_abuso_fiscal: { valor: 6.3, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    valor_de_IGFC: { valor: 928, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    cuota_CTHI: { valor: 2.3, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    Puntaje_de_opacidad: { valor: 70, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    GSW_de_secreto_financiero: { valor: 0.61, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    valor_de_FSI: { valor: 620, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    porcenraje_de_FSI: { valor: 1.74, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
+                    Indice_Basel_AML: { valor: 7.26, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
+                },
+            },
+        },
+        {
+            nombre: 'Suecia',
+            score: {
+                total: 0
+            },
+            sections: {
+                justicia: {
+                    derechos_humanos_fundamentales: { valor: '0.87', score:-13, fuente: 'worldjusticeproject' },
+                },
+                economia: {
+                    //* datos de evasion fiscal y secreto financiero
+                    puntaje_de_guarida_fiscal: { valor: 57, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    GSW_de_abuso_fiscal: { valor: 1.1, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    valor_de_IGFC: { valor: 417, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    cuota_CTHI: { valor: 1.0, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    Puntaje_de_opacidad: { valor: 44, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    GSW_de_secreto_financiero: { valor: 0.77, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    valor_de_FSI: { valor: 173, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    porcenraje_de_FSI: { valor: 0.48, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
+                    Indice_Basel_AML: { valor: 3.48, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
+                },
+            },
+        },
+        {
+            nombre: 'Francia',
+            score: {
+                total: 0
+            },
+            sections: {
+                justicia: {
+                    derechos_humanos_fundamentales: { valor: '0.73', score:-27, fuente: 'worldjusticeproject' },
+                },
+                economia: {
+                    //* datos de evasion fiscal y secreto financiero
+                    puntaje_de_guarida_fiscal: { valor: 65, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    GSW_de_abuso_fiscal: { valor: 2.8, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    valor_de_IGFC: { valor: 855, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    cuota_CTHI: { valor: 2.1, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    Puntaje_de_opacidad: { valor: 52, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    GSW_de_secreto_financiero: { valor: 3.56, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    valor_de_FSI: { valor: 455, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    porcenraje_de_FSI: { valor: 1.28, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
+                    Indice_Basel_AML: { valor: 3.99, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
+                },
+            },
+        },
+        {
+            nombre: 'Vietnam',
+            score: {
+                total: 0
+            },
+            sections: {
+                justicia: {
+                    derechos_humanos_fundamentales: { valor: '0.47', score:-53, fuente: 'worldjusticeproject' },
+                },
+                economia: { //? en estos casos el algoritmo deberá procesar información incompleta de un país 
+                    //* datos de evasion fiscal y secreto financiero
+                    //puntaje_de_guarida_fiscal: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    //GSW_de_abuso_fiscal: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    //valor_de_IGFC: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    //cuota_CTHI: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
+                    Puntaje_de_opacidad: { valor: 75, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    GSW_de_secreto_financiero: { valor: 0.03, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    valor_de_FSI: { valor: 288, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    porcenraje_de_FSI: { valor: 0.81, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
+                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
+                    Indice_Basel_AML: { valor: 6.69, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
+                },
+            },
+        },/*
+        {
+            nombre: '',
+            score: {
+                total: 0
+            },
+            sections: {},
+        },*/
+/*
+* export interface SeedPais {
+*    nombre: string;
+*    score: {
+*        [key: string]: number;
+*    },
+*    sections: {
+*        [key: string]: SeedVariables
+*    }
+* }
+* export interface SeedVariables {
+*    [key: string]: {
+*        valor: any,
+*        score: number,
+*        fuente: string,
+*    }
+* }
+*/
     ],
     informacion: [ // datos aportados por distintas fuentes
         {},
@@ -661,13 +1072,13 @@ export const initialData: seedData = {
     ], // agregar enlace a los datos...
     categorias: { // id de las marcas pertenecientes a cada categoria
         Todas: [801],
-        Alimentos: [804, 810],
+        Alimentos: [804],
         Vestimenta: [805],
-        HigienePersonal: [809],
+        HigienePersonal: [811],
         Software: [801, 802, 803, 808],
         Electronicos: [806, 807],
-        Servicios: [801],
-        Vehiculos: [801],
+        Servicios: [811],
+        Vehiculos: [811],
     },
     faqs: [
         {

@@ -6,6 +6,9 @@ export interface Criterio {
     slug?: string;
     section?: string;
     description?: string;
+    implicado: string;
+    tipo: string;
+    ratio: number;
     suscrito?: boolean;
     suscripciones?: number;
     variables: Variable[];
