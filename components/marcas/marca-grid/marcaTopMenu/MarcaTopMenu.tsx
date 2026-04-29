@@ -1,14 +1,14 @@
 
 import { useMarcaStore } from "@/store"
 
-type Cats = 'Todas' | 'Alimentos' | 'Vestimenta' | 'HigienePersonal' | 'Software' | 'Electronicos' | 'Servicios' | 'Vehiculos';
+type Cats = 'Todas' | 'Alimentos' | 'Vestimenta' | 'HigienePersonal' | 'Software' | 'Electrónicos' | 'Servicios' | 'Vehiculos';
 
 export const MarcaTopMenu = () => {
 
   // almacenamos la opcion seleccionada en el estado
   const catSel = useMarcaStore(state => state.categorySelected)
 
-  const categorias: Cats[] = ['Todas', 'Alimentos', 'Vestimenta', 'HigienePersonal', 'Software', 'Electronicos', 'Servicios', 'Vehiculos'];
+  const categorias: Cats[] = ['Todas', 'Alimentos', 'Vestimenta', 'HigienePersonal', 'Software', 'Electrónicos', 'Servicios', 'Vehiculos'];
 
   const seleccionarCategoria = useMarcaStore(state => state.SelectCategory )
 
