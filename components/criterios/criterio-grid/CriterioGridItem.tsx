@@ -1,13 +1,13 @@
 'use client';
 
-import { Criterio } from "@/interfaces";
+import { Criterio2 } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 
 interface Props {
-    criterio: Criterio;
+    criterio: Criterio2;
 }
 
 
@@ -37,34 +37,3 @@ export const CriterioGridItem = ({ criterio }:Props) => {
   )
 }
 
-{
-            { /*criterio.variables[0].variable*/ }
-
-  /*
-
-
-
-    <div className="rounded-md overflow-hidden fade-in">
-        <Link href={ `/product/${ product.slug }` }>
-          <Image
-              src={`/products/${ displayImage }`}
-              alt={ product.title }
-              className="w-full object-cover rounded"
-              width={ 500 }
-              height={ 500 }
-              onMouseEnter={() => setDisplayImage( product.images[1] )}
-              onMouseLeave={() => setDisplayImage( product.images[0] )}
-          />
-        </Link>
-        
-
-        <div className="p-4 flex flex-col">
-          <Link className="hover:text-blue-600" href={ `/product/${ product.slug }` }>
-            { product.title }
-          </Link>
-          <span className="font-bold">${ product.price }</span>
-        </div>
-
-    </div>
-    */
-}

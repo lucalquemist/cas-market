@@ -1,5 +1,126 @@
 'use client';
 
+import { Marca2 } from "@/interfaces";
+import { useMarcaStore } from "@/store";
+import { useState } from "react";
+
+interface Props {
+    marca: Marca2;
+}
+
+export const MainMarca = ({ marca }: Props) => {
+
+    const marca2 = useMarcaStore(store => store.marcasScore.find( marcax => marcax.id === marca.id )) as Marca2 //* en el store no hay nada si uno entra directamente a la marca
+    
+    console.log('marca2 main: ');
+    console.log(marca2);
+
+    const [orden, setOrden] = useState(true);
+
+    const variablesConCriterio = marca2.variables.filter(v => v.criterioNombre !== '')
+
+    console.log('variablesConCriterio: ');
+    console.log(variablesConCriterio);
+
+    const variablesAgrupadas = Object.groupBy(
+        variablesConCriterio,
+        (variable) => orden ? variable?.seccion : variable?.criterioNombre
+    );
+
+    /*const variablesAgrupadas = Object.groupBy(
+        marca2?.variables,
+        (variable) => orden ? variable?.seccion : variable?.criterioNombre
+    );*/
+    
+    //const productosAgrupados = Object.groupBy(marca2?.variables, (v) => v?.criterioNombre) // me devuelve un objeto con varios arreglos de objetos variables
+
+    const handleClick = () => {
+        setOrden(prev => !prev); //* a veces queda al revés
+    }
+
+    return (
+        <div className="ml-3">
+            <div className="">
+                <p>{marca2.name} - {marca2.category}</p>
+                <div className="mt-5 mb-2 max-w-60" onClick={handleClick}>
+                    <p className="flex justify-center bg-blue-600 hover:bg-blue-800 text-white py-1 px-2 rounded transition-all cursor-pointer ml-auto">
+                        agrupar en { orden ? ' secciones' : ' criterios' }
+                    </p>
+                </div>
+            </div>
+            <hr className="mt-3 mb-3" />
+            {Object.entries(variablesAgrupadas).map(
+                ([ordenador, variables]) => {
+                    if (!variables) return null;
+
+                    return (
+                        <div key={ordenador} className="m-2 mb-2">
+                            <h3>{ordenador}</h3>
+
+                            {Object.entries(variables).map(([key, value]) => (
+                                <p key={key} className="pl-3">
+                                    {value.variable}: {value.valor} ({value.puntos})
+                                </p>
+                            ))}
+                        </div>
+                    );
+                }
+            )}
+            
+            <p>Total: {marca2.puntuacion.criterios['total'].puntos}</p>
+            <hr className="mt-3 mb-3" />
+        </div>
+    )
+}
+
+/*
+* implementar la linea punteada hasta completar el ancho del renglón
+*
+* orden: nota ascendiente, nota descendiente, alfabetico ascendente y alfabetico descendente
+* agrupado: por criterio, por seccion, sin agrupar
+* 
+* agregar sección de enlaces a las fuentes
+* 
+* aplicar un sistema de color a los estilos de las notas
+* agregar imagenes
+* 
+* podria ser una i despues de la nota para desplegar el detalle de la variable 
+* la marca debe tener un subtotal de cada area
+*
+* que pasa en los casos en que hay mas de una fuente¿ 
+*/
+
+/**
+return (
+        <div className="ml-3">
+            <p>{marca2.name} - {marca2.category}</p>
+            <hr className="mt-3 mb-3" />
+            {Object.entries(marca2.sections).map(
+                ([section, variables]: [string, Variables | undefined]) => {
+                    if (!variables) return null;
+
+                    return (
+                        <div key={section}>
+                            <h3>{section}</h3>
+
+                            {Object.entries(variables).map(([key, value]) => (
+                                <p key={key} className="pl-3">
+                                    {key}: {value.valor} ({value.score})
+                                </p>
+                            ))}
+                        </div>
+                    );
+                }
+            )}
+            <p>Total: {marca2.score['total']}</p>
+            <hr className="mt-3 mb-3" />
+        </div>
+    )
+ */
+
+/*
+'use client';
+
 // import { Marca } from "@/interfaces";
 
 import { useMarcaStore } from "@/store";
@@ -70,16 +191,4 @@ export const MainMarca = ({ marca }: Props) => {
         </div>
     )
 }
-/**
- * * agregar un enlace a la fuente
- * * también agregar una lista desplegable para elegir las distintas fuentes
- * * podria ser una i despues de la nota para desplegar el detalle de la variable
- * * la marca debe tener un subtotal de cada area¿
- * * 
- * * hacemos un algoritmo y preguntamos por la fuente del proximo dato, si es diferente o inexistente entonces publicamos el enlace actual
- * *
- * *
- * *
- * *
- * * {marca2.score[section]}
- */
+*/

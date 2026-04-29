@@ -4,7 +4,7 @@ import { CriterioGrid } from "@/components";
 import { initialData } from "@/seed/seed";
 
 
-const criterios = initialData.criterios;
+const criterios = initialData.criterios2;
 
 export default function Home() {
 

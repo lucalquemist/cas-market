@@ -1,12 +1,12 @@
 'use client';
 
 import { useCriteriosStore } from "@/store";
-import { Criterio } from "@/interfaces";
+import { Criterio2 } from "@/interfaces";
 import { CriterioGridItem } from "./CriterioGridItem";
 
 
 interface Props {
-  criterios: Criterio[];
+  criterios: Criterio2[];
 }
 
 
@@ -17,8 +17,9 @@ export const CriterioGrid = ({ criterios }: Props) => {
 
   return (
     <div className="ml-3 mr-3 max-w-300">
+
       <p className="mb-3">Criterios seleccionados:</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
         {
           // aca vamos a mostrar unicamente los favoritos
           favoritos.map(criterio => (
@@ -31,6 +32,7 @@ export const CriterioGrid = ({ criterios }: Props) => {
       </div>
 
       <hr className="border-t-4 border-blue-500 w-full pb-10" />
+
       <p className="mb-3">Todos los criterios:</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
@@ -49,34 +51,28 @@ export const CriterioGrid = ({ criterios }: Props) => {
 }
 
 /*
-* implementando el país en las marcas:
-* //? por ahora solamente agregamos a las marcas el objeto de países con su respectivo porcentaje de responsabilidad sobre el producto
-* agregamos los criterios gub al seed (para puntuar paises) y agregamos las variables a cada pais: //? 1 de 7
-* //? contra la evasión fiscal
-* contra el lavado de activos //https://index.baselgovernance.org/ranking
-* El Basel AML Index es un índice anual independiente desarrollado por el Basel Institute on Governance que clasifica a los países según el riesgo de lavado de activos y financiamiento del terrorismo (LA/FT). Funciona como una herramienta de evaluación de riesgos para instituciones financieras y empresas, con una puntuación del 0 al 10 (donde 10 es mayor riesgo), basada en 17 indicadores de fuentes
-* 
-* contra la contaminación ambiental 
-* para mejorar la educación
-* para mejorar la salud pública
-* para mejorar la eficiencia del gasto
-* para regular el uso de patentes
-* 
-* 
-* agregamos la coleccion de paises al seed, vamos a ir agregando de a poco, el algoritmo debe reflejar esto
-* hacemos el algoritmo de calculo de puntos de los paises
-* hacemos algoritmo de asignar a las marcas puntos por responzabilidad de sus paises
-* mostramos los puntos por pais en la vista individual de cada marca
-*
-* la idea es que si una empresa está situada en un país determinado entonces se le suma la puntuación del país.
-* para evitar que los gobiernos hagan trampa las mediciones son de distintos tipos ya que un pais bien puede mejorar aspectos inocuos para subir notas
-* 
-* corregir estilos en tema claro y oscuro, corregir saltos de linea en criterio description
-* 
-* agregar el control de seleccion de sistema y estrategia de puntuación
-* agregar control de ratio para poder editarlo
-* 
-* hacer criterios de otro tipo, propositivos.
+* //? (vista de marca individual) al cancelar un criterio la nota total de las marcas se actualiza pero no las variables individuales ¿ use select ¿
+
+* modificar los algoritmos para que muestren el porcentaje de información obtenida //?
+
+* agregar el gestor de ratios en su propia vista //?
+
+* en main marca: //?
+* botón 0: todas las variables juntas
+* botón 1: elige ordenar por criterios
+* boton 2: elige ordenar por seccion
+* botón 3: elige ordenar [a-z]↑ y al pusar nuevamente es [a-z]↓
+* botón 4: elige ordenar por puntos ↑ y al pulsar nuevamente es ↓ 
+
+* criterios de paises
+* 3) contra la contaminación ambiental 
+* 4) para mejorar la educación
+* 5) para mejorar la salud pública
+* 6) para mejorar la eficiencia del gasto
+* 7) para regular el uso de patentes
+* 8) para mejorar la justicia
+
+* hacer criterios de otro tipo:
 * ejemplo: un criterio en el que se ajusten las reglas de juego para que haya mas cantidad de ganadores y esto se parezca mas a una meritocracia
 * ejemplo2: poner fin a la obsolescencia programada
 * ejemplo3: sobregiro ecológico(empresa, gobierno, usuarios)
@@ -94,49 +90,62 @@ export const CriterioGrid = ({ criterios }: Props) => {
 * criterio medio ambiente, ver greenwalling
 * criterio de proyeccion de la empresa
 * ¿criterio para presionar a las inmobiliarias¿ opción: leyes que regulen fuertemente
-*
-* 
+* criterio: mecanismos para que una empresa exonere o disminuya los puntos perdidos por culpa del gobierno
+
+
 * tipos de criterios: 
 *    boicot            ( castiga comportamientos maliciosos restando puntos ) rojo
 *    restaurador       ( premia buenas acciones sumando con puntos ) verde
 *    estructural       ( promueve cambios en las estructuras de poder ) azul
-*
+
 * hacer curso de tailwind
-* agregar ratio a los criterios
-* agreagar atributo que diga si los indices son reales o ficticios
-* 
-* ver como implementar los criterios de los gobiernos: lista de paises, se les aplica los criterios seleccionados y eso determina la puntuación del país
-* entonces a la empresa se le suman(o restan) los puntos del país. ¿que hacemos si una empresa tiene presencia en mas de un pais¿
-* en estos casos vemos la importancia de cada pais en el producto, ejemplo: materias primas de ecuador 50puntos con 1/4 de importancia
-* sobre el total y produccion en grecia 60 puntos con 3/4 sobre el total, la nota sería: (50*0.25) + (60*0.75) = 12.5 + 45 = 57.5
-* este primer metodo tiene en cuenta ambos paises, el segundo metodo puede ser:
-* idem al anterior pero solo en criterios verdes y azules, para los criterios rojos la nota no disminuye
-* estas formas de calcular se eligen, son criterios
-* ¿que pasa si tenes que juntar piezas de varios paises¿ acumular restas o sumas afecta la competencia¿
-* R: elegimos aplicar la puntuación del peor país implicado. en estos casos los demas gobiernos pierden incentivos de mejora¿
-* R:
-* 
+* hacer curso de cssgrid
+
+* corregir estilos en tema claro y oscuro, corregir saltos de linea en criterio description
+
+* sistema de puntos de pais: comparar area a area de cada pais y nos quedamos con la peor puntuación de cada area
+
 * mostrar las fuentes en las marcas
-* 
+
 * implementar la proyeccion de la empresa
-* 
-* por otro lado también tenemos mecanismos para que una empresa exonere o disminuya los puntos perdidos por culpa del gobierno
+
 * "¿que pueden hacer las empresas para recuperar puntos perdidos por este criterio¿"
 * ejemplo: cada criterio gub tiene debajo un selector de opción/es de indulto/s y un selector del % de exoneración
-*
+
+* CRITERIOS
 * agregar filtro selector de tipo de criterio y filtro selector de actor implicado (por ahora empresa o gobierno)
-* 
+
 * ver los casos de las empresas como peliculas, futbol, manga/anime, etc en los que queremos proponer alternativas
 * ver caso de turismo, criterio sobre hoteles y demás empresas/gobiernos según corresponda
-*
-* luego en el panel de empresas podemos poner que cantidad/porcentaje de los usuarios se suscribe a cada criterio
+* 
 * ¿como podemos mostrar las mayores oportunidades de productos en los que mas haga falta emprender¿
 * R: revisando sector por sector y viendo el area roja (cuota de mercado x puntaje rojo de la empresa)
 * ejemplo: industria de celulares - cantidad de usuarios iphone * -180 + lo mismo con samsung, etc. eso nos da la cantidad de rojo en el mercado
-*
-* ¿agregamos un arreglo con la información de las empresas de los países que intervienen en las distintas etapas de producción del producto¿
-* es dificil presionar a paises que son monopolios de producción de un recurso
-* 
-* 
-* 
+
+* agreagar atributo que diga si los indices son reales o ficticios
+
+¿agregamos un arreglo con la información de las empresas de los países que intervienen en las distintas etapas de producción del producto¿
+ 
+en el algoritmo de calculo de puntos del pais:
+agregar las variables cuya información es desconocida al resultado 
+implementar un sistema que refleje la cantidad de información procesada
+a la hora de mostrar un pais muestro su info y le agrego las variables que me piden los criterios
+aunque no tengan datos, agrego un dato de porcentaje de datos obtenidos
+surgen criterios para autocompletar los datos faltantes
+* de momento correrir la info que muestran las empresas para que al menos muestren lo que ya traen
+
+* implementar un sistema que muestre los sectores en los que más hace falta emprender de manera responzable
+para calcularlos hacemos la suma de la multiplicación de la cuota de mercado de cada una de las empresas 
+del sector por la cantidad de puntos negativos de la misma
+
+* FUTURO
+agregar el control de seleccion de sistema y estrategia de puntuación (ejemplo: estrategia que multa con perdidas extra los retrocesos en puntos)
+
+al mostrar una marca se muestran por defecto los atributos de los criterios seleccionados, agregar opción de ver todos los datos
+
+cambiar el algoritmo de paises, agregamos un criterio activado por defecto en el que se agrega la información a medida que nos suscribimos
+a los criterios de paises
+
+
+
 */

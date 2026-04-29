@@ -1,18 +1,18 @@
 
-import { Marcas } from "@/interfaces";
+import { Marca2 } from "@/interfaces";
 import { create } from "zustand"
 //
 
 interface MarcaState {
     categorySelected: Cats
-    marcasScore: Marcas
+    marcasScore: Marca2[]
 
     SelectCategory: (category: Cats) => void
-    updateMarcasScore: (marcas: Marcas) => void
+    updateMarcasScore: (marcas: Marca2[]) => void
     
 }
 
-type Cats = 'Todas' | 'Alimentos' | 'Vestimenta' | 'HigienePersonal' | 'Software' | 'Electronicos' | 'Servicios' | 'Vehiculos';
+type Cats = 'Todas' | 'Alimentos' | 'Vestimenta' | 'HigienePersonal' | 'Software' | 'Electrónicos' | 'Servicios' | 'Vehiculos';
 
 export const useMarcaStore = create<MarcaState>((set, get) => ({
     categorySelected: 'Todas',

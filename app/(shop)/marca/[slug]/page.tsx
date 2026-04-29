@@ -1,7 +1,7 @@
 
 
 import { MainMarca } from "@/components";
-import { Marca } from "@/interfaces";
+import { Marca2 } from "@/interfaces";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 
@@ -11,12 +11,12 @@ interface Props {
     }>;
 }
 
-export default async function CriterioPage({ params }: Props) {
+export default async function MarcaPage({ params }: Props) {
 
     console.log('marcaaaaaaaa');
     const { slug } = await params;
 
-    const marca: Marca = initialData.marcas.find(
+    const marca: Marca2 = initialData.marcas2.find(
         marca => marca.slug == slug
     )!; // ?? esta cacarteristica permite recurrir a un valor predeterminado cuando se trata de un valor nulo o indefinido || podemos usar este operador y en caso de que no se encuentre mostramos este
 

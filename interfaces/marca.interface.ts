@@ -2,11 +2,12 @@ export interface Marcas {
     [id: number]: Marca;
 }
 
-export interface Marca {
+export interface Marca { 
     id: number;
     name: string;
     slug: string;
     category: string;
+    etapas: SeedEtapa[];
     score: {
         [key: string]: number;
     },
@@ -18,6 +19,7 @@ export interface Secciones {
     responsabilidad_belica?: Variables,
     responsabilidad_con_animales?: Variables,
     responsabilidad_laboral?: Variables,
+    responsabilidad_pais?: Variables;
 }
 
 export interface Variables {
@@ -25,6 +27,10 @@ export interface Variables {
         valor: any,
         score: number,
     }
+}
+export interface SeedEtapa {
+    pais: string;
+    participacion: number;
 }
 
 //export interface Dato {

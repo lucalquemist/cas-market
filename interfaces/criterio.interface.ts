@@ -1,5 +1,5 @@
 // import type { SeedInformation } from "./information.interface";
-
+/*
 export interface Criterio {
     id: number;
     title: string;
@@ -35,7 +35,7 @@ export interface Sections {
     responsabilidad_laboral?: Variable[];
 }
 
-
+*/
 
 
 

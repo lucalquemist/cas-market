@@ -11,10 +11,10 @@ interface Props {
 }
 
 export default async function CriterioPage({ params }: Props) {
-  
+
   const { slug } = await params;
 
-  const criterio = initialData.criterios.find(
+  const criterio = initialData.criterios2.find(
     criterio => criterio.slug == slug
   );
 
