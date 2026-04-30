@@ -3,6 +3,7 @@
 import { Criterio2 } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
+import clsx from "clsx";
 import { useState } from "react";
 
 
@@ -32,7 +33,14 @@ export const CriterioGridItem = ({ criterio }:Props) => {
           <div className="flex justify-between">
             <span className="font-bold text-gray-500 text-sm">Suscripciones: { criterio.suscripciones }</span>
             
-            <div className="px-1 bg-amber-800 rounded">{criterio.tipo}</div>
+            <div className={
+              clsx("px-1 rounded",
+                {
+                  'bg-red-500': true,
+                  'bg-green-700': false,
+                }
+              ) 
+            }>{criterio.tipo}</div>
             <div className="mx-1 px-1 bg-blue-600 rounded ">{criterio.implicado}</div>
           
           </div>
@@ -43,3 +51,4 @@ export const CriterioGridItem = ({ criterio }:Props) => {
   )
 }
 
+//bg-amber-800 rounded
