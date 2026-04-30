@@ -29,7 +29,13 @@ export const CriterioGridItem = ({ criterio }:Props) => {
             { descriptionTrunc }
           </Link>
           { /* agregar opción de guardar y opción de suscripción */ }
-          <span className="font-bold text-gray-500 text-sm">Suscripciones: { criterio.suscripciones }</span>
+          <div className="flex justify-between">
+            <span className="font-bold text-gray-500 text-sm">Suscripciones: { criterio.suscripciones }</span>
+            
+            <div className="px-1 bg-amber-800 rounded">{criterio.tipo}</div>
+            <div className="mx-1 px-1 bg-blue-600 rounded ">{criterio.implicado}</div>
+          
+          </div>
         </div>
     </div>
 
