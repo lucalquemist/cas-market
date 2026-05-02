@@ -275,8 +275,8 @@ export const initialData: seedData = {
         },
         {
             id: 105,
-            title: 'responsabilidad en el manejo de datos',
-            slug: 'responsabilidad_en_el_manejo_de_datos',
+            title: 'manejo de datos',
+            slug: 'manejo_de_datos',
             section: 'responsabilidad_en_el_manejo_de_datos',
             description: 'Controla la responsabilidad de las redes sociales y otros sitios/aplicaciones en el manejo de los datos de los usuarios',
             implicado: 'empresas',
@@ -325,6 +325,50 @@ export const initialData: seedData = {
                         falso: { score: 0, description: '' },
                     } // https://www.gub.uy/unidad-reguladora-control-datos-personales/comunicacion/publicaciones/guia-proteccion-datos-personales-para-empresas-especial-micro-pequenas-0 
                 },
+            }
+        },
+        {
+            id: 108,
+            title: 'meritocracia',
+            slug: 'meritocracia',
+            section: 'economia',
+            description: 'este criterio busca hacercar la realidad a algo mas parecido a una meritocracia. no hay mérito que justifique concentrar más de 10 millones de euros',
+            implicado: 'empresas',
+            tipo: 'estructural',
+            ratio: 1,
+            suscrito: false,
+            suscripciones: 1234567,
+            variables: {
+                concentracion_de_la_riqueza: {
+                    description: 'esta variable mide cuanta riqueza concentran los dueños de las empresas, siendo el máximo tolerable 10 millones de euros',
+                    section: 'economia',
+                    formula: 'rangos',
+                    options: {
+                        // una formula en la que se suman puntos si se tiene menos que 10M
+                    },
+                }
+            }
+        },
+        {
+            id: 109,
+            title: 'mecanismo FPRE', // mecanismo RFP
+            slug: 'mecanismo_FPRE',
+            section: 'economia',
+            description: 'Este criterio es un mecanismo de financiamiento de proyectos, las empresas suscritas se someten a reglas económicas las cuales determinan cuánto dinero de sus ganancias tienen que aportar a los proyectos.',
+            implicado: 'empresas',
+            tipo: 'estructural',
+            ratio: 1,
+            suscrito: false,
+            suscripciones: 1234567,
+            variables: {
+                concentracion_de_la_riqueza: {
+                    description: '',
+                    section: 'economia',
+                    formula: '',
+                    options: {
+                        // 
+                    },
+                }
             }
         },
         //* criterios de paises
@@ -437,7 +481,7 @@ export const initialData: seedData = {
             },
             /*
         {
-            id: 107,
+            id: 10,
             title: '',
             slug: '',
             section: '',
@@ -447,20 +491,18 @@ export const initialData: seedData = {
             ratio: 1,
             suscrito: false,
             suscripciones: 1234567,
-            variables: [
-            {
-                    variable: '',
+            variables: {
+                nomvariable: {
                     description: '',
                     section: '',
-                    options: [
-                        { value: true, score: 0, description: '' },
-                        { value: false, score: 0, description: '' },
-                    ]
-                },
-            ],
+                    formula: '',
+                    options: '',
+                }
+            }
         },
         */
         },
+        
     ],
     marcas2: [
         {
@@ -606,7 +648,7 @@ export const initialData: seedData = {
                     variable: 'Deficiencias_de_Seguridad',
                     seccion: 'responsabilidad_en_el_manejo_de_datos',
                     criterioNombre: '',
-                    valor: 'falso',
+                    valor: 'verdadero',
                     puntos: 0,
                     fuente: '',
                 },
@@ -622,7 +664,7 @@ export const initialData: seedData = {
                     variable: 'Incumplimiento_Normativo',
                     seccion: 'responsabilidad_en_el_manejo_de_datos',
                     criterioNombre: '',
-                    valor: 'falso',
+                    valor: 'verdadero',
                     puntos: 0,
                     fuente: '',
                 },

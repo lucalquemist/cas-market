@@ -65,14 +65,17 @@ export const CriterioGrid = ({ criterios }: Props) => {
 * botón 4: elige ordenar por puntos ↑ y al pulsar nuevamente es ↓ 
 
 * criterios de paises
+* 
 * 3) contra la contaminación ambiental 
 * 4) para mejorar la educación
 * 5) para mejorar la salud pública
-* 6) para mejorar la eficiencia del gasto
+* 6) para mejorar la eficiencia del gasto del estado
 * 7) para regular el uso de patentes
 * 8) para mejorar la justicia
+* 9) contra la guerra: criterio que penaliza los paises por sus crimenes de guerra
 
 * hacer criterios de otro tipo:
+* ejemplo: criterio para que las empresas 
 * ejemplo: un criterio en el que se ajusten las reglas de juego para que haya mas cantidad de ganadores y esto se parezca mas a una meritocracia
 * ejemplo2: poner fin a la obsolescencia programada
 * ejemplo3: sobregiro ecológico(empresa, gobierno, usuarios)

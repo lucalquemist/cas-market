@@ -23,12 +23,12 @@ export const CriterioGridItem = ({ criterio }:Props) => {
 
         <Link href={ `/criterio/${ criterio.slug }` }>
           { criterio.title }
-        </Link>
 
-        <div className="pt-2 flex flex-col">
-          <Link className="hover:text-blue-600" href={ `/criterio/${ criterio.slug }` }>
+<div className="pt-2 flex flex-col">
+          <div className="hover:text-blue-600">
             { descriptionTrunc }
-          </Link>
+          </div>
+          
           { /* agregar opción de guardar y opción de suscripción */ }
           <div className="flex justify-between">
             <span className="font-bold text-gray-500 text-sm">Suscripciones: { criterio.suscripciones }</span>
@@ -36,19 +36,31 @@ export const CriterioGridItem = ({ criterio }:Props) => {
             <div className={
               clsx("px-1 rounded",
                 {
-                  'bg-red-500': true,
-                  'bg-green-700': false,
+                  'bg-red-800': criterio.tipo =='boicot',
+                  'bg-blue-600': criterio.tipo =='estructural', //* corregir
                 }
               ) 
             }>{criterio.tipo}</div>
-            <div className="mx-1 px-1 bg-blue-600 rounded ">{criterio.implicado}</div>
+            <div className={
+              clsx("px-1 rounded ", 
+                {
+                  'bg-yellow-600': criterio.implicado =='paises',
+                  'bg-indigo-700': criterio.implicado =='empresas',
+                }
+              )
+            }>{criterio.implicado}</div>
           
           </div>
         </div>
+
+        </Link>
+        
     </div>
 
     
   )
 }
 
-//bg-amber-800 rounded
+// bg-green-700
+// border-4 border-sky-500
+// rounded bg-red-500 bg-green-700
