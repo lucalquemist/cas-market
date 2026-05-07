@@ -14,13 +14,15 @@ export const MainCriterio = ({ criterio }: Props) => {
 
   const addFavorite = useCriteriosStore(state => state.addFavorite)
   const removeFavorite = useCriteriosStore(state => state.removeFavorite)
-  const favorite = useCriteriosStore( //state => !!state.favorites[criterio.id]
-    state => !!state.favorites.find(c => c.id == criterio.id)
+  const favorite = useCriteriosStore( state => !!state.favorites[criterio.id]
+    // state => !!state.favorites.find(c => c.id == criterio.id)
   )
   const handleClick = () => {
     if (favorite) {
+      criterio.suscrito = false;
       removeFavorite(criterio.id)
     } else {
+      criterio.suscrito = true;
       addFavorite(criterio)
     }
     //* al quitar un criterio no se actualizan las marcas

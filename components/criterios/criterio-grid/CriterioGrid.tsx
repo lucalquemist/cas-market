@@ -3,6 +3,8 @@
 import { useCriteriosStore } from "@/store";
 import { Criterio2 } from "@/interfaces";
 import { CriterioGridItem } from "./CriterioGridItem";
+import { useEffect } from "react";
+import { RatiosPanel } from "./ratios-panel/RatiosPanel";
 
 
 interface Props {
@@ -15,68 +17,72 @@ export const CriterioGrid = ({ criterios }: Props) => {
   const favorites = useCriteriosStore(state => state.favorites)
   const favoritos = Object.values(favorites)
 
+  /*let noFavs: Criterio2[] = [];
+  useEffect(() => {
+    noFavs = criterios.filter(c => {
+      return c.suscrito == false;
+    })
+  }, [favorites])*/
+
   return (
-    <div className="ml-3 mr-3 max-w-300">
+    <div className="sm:flex">
+      <RatiosPanel />
+      <div className="ml-3 mr-3 max-w-300">
 
-      <p className="mb-3">Criterios seleccionados:</p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-        {
-          // aca vamos a mostrar unicamente los favoritos
-          favoritos.map(criterio => (
-            <CriterioGridItem
-              key={criterio.title}
-              criterio={criterio}
-            />
-          ))
-        }
+        <p className="mb-3">Criterios seleccionados:</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+          {
+            // aca vamos a mostrar unicamente los favoritos
+            favoritos.map(criterio => (
+              <CriterioGridItem
+                key={criterio.title}
+                criterio={criterio}
+              />
+            ))
+          }
+        </div>
+
+        <hr className="border-t-4 border-blue-500 w-full pb-10" />
+
+        <p className="mb-3">Todos los criterios:</p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+          {
+            criterios.map(criterio => (
+              <CriterioGridItem
+                key={criterio.title}
+                criterio={criterio}
+              />
+            ))
+          }
+        </div>
+
       </div>
-
-      <hr className="border-t-4 border-blue-500 w-full pb-10" />
-
-      <p className="mb-3">Todos los criterios:</p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-        {
-          criterios.map(criterio => (
-            <CriterioGridItem
-              key={criterio.title}
-              criterio={criterio}
-            />
-          ))
-        }
-      </div>
-
     </div>
   )
 }
 
 /*
-* //? (vista de marca individual) al cancelar un criterio la nota total de las marcas se actualiza pero no las variables individuales ¿ use select ¿
+* //? implementar marcas ficticias
+
+* //? criterio para que los usuarios inscriptos ganen descuentos
 
 * modificar los algoritmos para que muestren el porcentaje de información obtenida //?
 
-* agregar el gestor de ratios en su propia vista //?
-
-* en main marca: //?
-* botón 0: todas las variables juntas
-* botón 1: elige ordenar por criterios
-* boton 2: elige ordenar por seccion
-* botón 3: elige ordenar [a-z]↑ y al pusar nuevamente es [a-z]↓
-* botón 4: elige ordenar por puntos ↑ y al pulsar nuevamente es ↓ 
+* //? agregar el gestor de ratios en su propia vista //?
 
 * criterios de paises
 * 
-* 3) contra la contaminación ambiental 
+* //? 3) contra la contaminación ambiental 
 * 4) para mejorar la educación
 * 5) para mejorar la salud pública
 * 6) para mejorar la eficiencia del gasto del estado
 * 7) para regular el uso de patentes
 * 8) para mejorar la justicia
-* 9) contra la guerra: criterio que penaliza los paises por sus crimenes de guerra
+* //? 9) contra la guerra: criterio que penaliza los paises por sus crimenes de guerra
 
-* hacer criterios de otro tipo:
-* ejemplo: criterio para que las empresas 
-* ejemplo: un criterio en el que se ajusten las reglas de juego para que haya mas cantidad de ganadores y esto se parezca mas a una meritocracia
+* //? hacer criterios de otro tipo: usar la plata para fundar empresas automatizadas que nos vendan los artículos a precio de costo
+* ejemplo2: poner fin a la obsolescencia programada
 * ejemplo2: poner fin a la obsolescencia programada
 * ejemplo3: sobregiro ecológico(empresa, gobierno, usuarios)
 * ejemplo4: huella ecológica por persona, este criterio tendría el objetivo de modificar los comportamientos de consumo de las personas de mayores
@@ -110,7 +116,7 @@ export const CriterioGrid = ({ criterios }: Props) => {
 
 * mostrar las fuentes en las marcas
 
-* implementar la proyeccion de la empresa
+* //? implementar la proyeccion de la empresa
 
 * "¿que pueden hacer las empresas para recuperar puntos perdidos por este criterio¿"
 * ejemplo: cada criterio gub tiene debajo un selector de opción/es de indulto/s y un selector del % de exoneración

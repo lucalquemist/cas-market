@@ -39,7 +39,7 @@ export const MainMarca = ({ marca }: Props) => {
     }
 
     return (
-        <div className="ml-3">
+        <div className="ml-3 ">
             <div className="">
                 <p>{marca2.name} - {marca2.category}</p>
                 <div className="mt-5 mb-2 max-w-60" onClick={handleClick}>

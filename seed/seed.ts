@@ -138,7 +138,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: {
                 severidad_de_experimentos_en_animales: {
@@ -206,7 +206,7 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscripciones: 1234567,
-            suscrito: false,
+            suscrito: true,
             variables: {
                 responsabilidad_belica_empresarial: {
                     description: 'calcula el nivel de responsabilidad de la marca en crimenes de guerra ligados al genocidio de poblaciones',
@@ -228,7 +228,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: {
                 presencia_de_trabajo_forzoso: {
@@ -282,7 +282,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: {
                 Falta_de_Proporcionalidad_y_Necesidad: {
@@ -336,7 +336,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'estructural',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: {
                 concentracion_de_la_riqueza: {
@@ -358,7 +358,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'estructural',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: {
                 concentracion_de_la_riqueza: {
@@ -381,7 +381,7 @@ export const initialData: seedData = {
             implicado: 'paises',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: { //* facilitadores del abuso fiscal corporativo
                 puntaje_de_guarida_fiscal: { //https://cthi.taxjustice.net/es/full-list
@@ -467,7 +467,7 @@ export const initialData: seedData = {
             implicado: 'paises',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: false,
+            suscrito: true,
             suscripciones: 1234567,
             variables: {
                 Indice_Basel_AML: {

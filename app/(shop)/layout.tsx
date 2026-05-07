@@ -6,7 +6,8 @@ export default function ShopLayout({ children }: {
  children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen">
+    //min-h-dvh dinamic vh
+    <main className="min-h-dvh">
         { /* top */ }    
         <TopMenu />
         { /* sidebar */ }

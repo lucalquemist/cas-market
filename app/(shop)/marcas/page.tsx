@@ -109,7 +109,14 @@ export default function MarcasPage() {
             for (const vari of marcai.variables) { //* cada vez que entro a la pagina borro las notas de las variables
                 vari.puntos = 0;
                 vari.criterioNombre = '';
+
+                // if (vari.seccion == 'responsabilidad_pais') { }
             }
+            // en cada marca filtro las variables, descartando las de paises
+            const variablesFiltradas = marcai.variables.filter(v => {
+                return v.seccion !== 'responsabilidad_pais'
+            })
+            marcai.variables = variablesFiltradas;
         } 
 
         // calcularPuntosMarcasPaises(criterios, paises);
@@ -138,7 +145,7 @@ export default function MarcasPage() {
 
                         if (criterio.variables[variable.variable].options[variable.valor]) { // la opción elegida es válida
 
-                            variable.puntos = criterio.variables[variable.variable].options[variable.valor].score // agregamos la puntuación que corresponda 
+                            variable.puntos = criterio.variables[variable.variable].options[variable.valor].score * criterio.ratio //* agregamos la puntuación que corresponda 
 
                             puntosCriterio += variable.puntos // acumulo los puntos de las variables
                         }
@@ -199,17 +206,7 @@ export default function MarcasPage() {
                             fuente: ''
                         })
                     }
-                    
-                    /*
-                    variables: {
-                        variable: string; // pais
-                        seccion: string; // responsabilidad pais
-                        criterioNombre: string; // criterios de paises
-                        valor: any; // participaciones 
-                        puntos: number; // puntos pais
-                        fuente: string;
-                    }[]
-                    */
+
                 }
             }
             // en cada marca agrego el acumulado en scores/criterio/paises y en scores/secciones/paises

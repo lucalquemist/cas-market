@@ -8,56 +8,56 @@ import { useState } from "react";
 
 
 interface Props {
-    criterio: Criterio2;
+  criterio: Criterio2;
 }
 
 
-export const CriterioGridItem = ({ criterio }:Props) => {
-  
+export const CriterioGridItem = ({ criterio }: Props) => {
+
   // const [ displayImage, setDisplayImage ] = useState( criterio.images[0] );
   const descriptionTrunc = criterio.description?.slice(0, 200);
 
   return (
+    // bg-linear-to-br from-red-800 via-pink-300 to-yellow-600
+    <div className="p-2 rounded-md overflow-hidden fade-in border">
 
-    <div className="p-2 rounded-md overflow-hidden fade-in border ">
+      <Link href={`/criterio/${criterio.slug}`}>
+        {criterio.title}
 
-        <Link href={ `/criterio/${ criterio.slug }` }>
-          { criterio.title }
-
-<div className="pt-2 flex flex-col">
+        <div className="pt-2 flex flex-col">
           <div className="hover:text-blue-600">
-            { descriptionTrunc }
+            {descriptionTrunc}
           </div>
-          
-          { /* agregar opción de guardar y opción de suscripción */ }
+
+          { /* agregar opción de guardar y opción de suscripción */}
           <div className="flex justify-between">
-            <span className="font-bold text-gray-500 text-sm">Suscripciones: { criterio.suscripciones }</span>
-            
+            <span className="font-bold text-gray-500 text-sm">Suscripciones: {criterio.suscripciones}</span>
+
             <div className={
               clsx("px-1 rounded",
                 {
-                  'bg-red-800': criterio.tipo =='boicot',
-                  'bg-blue-600': criterio.tipo =='estructural', //* corregir
+                  'bg-red-800': criterio.tipo == 'boicot',
+                  'bg-blue-600': criterio.tipo == 'estructural', //* corregir
                 }
-              ) 
+              )
             }>{criterio.tipo}</div>
             <div className={
-              clsx("px-1 rounded ", 
+              clsx("px-1 rounded ",
                 {
-                  'bg-yellow-600': criterio.implicado =='paises',
-                  'bg-indigo-700': criterio.implicado =='empresas',
+                  'bg-yellow-600': criterio.implicado == 'paises',
+                  'bg-indigo-700': criterio.implicado == 'empresas',
                 }
               )
             }>{criterio.implicado}</div>
-          
+
           </div>
         </div>
 
-        </Link>
-        
+      </Link>
+
     </div>
 
-    
+
   )
 }
 
