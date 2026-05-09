@@ -58,9 +58,15 @@ export const MainMarca = ({ marca }: Props) => {
                             <h3>{ordenador}</h3>
 
                             {Object.entries(variables).map(([key, value]) => (
-                                <p key={key} className="pl-3">
-                                    {value.variable}: {value.valor} ({value.puntos})
-                                </p>
+                                <div key={key} className="pl-3">
+                                    
+                                    <p> {value.variable}: {value.valor} ({value.puntos}) </p>
+                                    
+                                    { value.explicacion && (
+                                        <p> {` * (${value.explicacion})`} </p>
+                                    )}
+                                
+                                </div>
                             ))}
                         </div>
                     );

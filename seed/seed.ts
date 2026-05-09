@@ -55,6 +55,7 @@ interface SeedMarca2 {
         seccion: string;
         criterioNombre: string;
         valor: any,
+        explicacion?: string,
         puntos: number,
         fuente: string,
     }[];
@@ -198,10 +199,10 @@ export const initialData: seedData = {
         },
         {
             id: 103,
-            title: 'contra las guerras',
-            slug: 'contra_las_guerras',
+            title: 'contra el genocidio del pueblo palestino',
+            slug: 'contra_el_genocidio_del_pueblo_palestino',
             section: 'responsabilidad_belica',
-            description: 'este criterio indica si una empresa o marca o país participa de forma directa o en distintos niveles indirectamente en crimenes de guerra',
+            description: 'Este criterio se encarga de puntuar a las empresas que participan del genocidio que se está cometiendo actualmente contra el pueblo palestino, para poner fin a estas atrocidades hay que dejar de financiar a quienes las realizan. “Estados, instituciones públicas y empresas de todo el mundo están facilitando con su complicidad, su apoyo o su parálisis autoimpuesta, las prolongadas violaciones del derecho internacional por parte de Israel, incluidos su genocidio en curso contra la población palestina de la Franja de Gaza ocupada, su ocupación ilegal de todo el Territorio Palestino Ocupado (TPO) y su cruel sistema de apartheid contra toda la población palestina cuyos derechos controla, o beneficiándose de ellas […] Ya es hora de que los Estados, las instituciones públicas, las empresas, las universidades y otros actores no estatales pongan fin a su adicción letal a las ganancias y los beneficios económicos a toda costa. La prolongada ocupación ilegal y décadas de apartheid ha requerido un apoyo a fondo y continuo a Israel mediante las relaciones económicas y el comercio. Mantener 23 meses de bombardeos incesantes y un genocidio en curso ha requerido un suministro interminable de armas y equipos de vigilancia respaldado por unas relaciones comerciales privilegiadas y unos Estados y unas empresas dispuestos a ignorar lo indefendible” afirma Amnistía Internacional',
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
@@ -327,6 +328,7 @@ export const initialData: seedData = {
                 },
             }
         },
+        //* criterios estructurales ... editando...
         {
             id: 108,
             title: 'meritocracia',
@@ -890,7 +892,8 @@ export const initialData: seedData = {
                     variable: 'responsabilidad_belica_empresarial',
                     seccion: 'responsabilidad_belica',
                     criterioNombre: '',
-                    valor: 'complicidad_indirecta', // construyo una planta en palestina ocupada ilegalmente
+                    valor: 'complicidad_indirecta',
+                    explicacion: 'construyó una planta en el territorio palestino ocupado ilegalmente',
                     puntos: 0,
                     fuente: '',
                 },

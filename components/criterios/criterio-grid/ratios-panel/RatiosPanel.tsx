@@ -55,6 +55,47 @@ export const RatiosPanel = () => {
     </div>
   );
 };
+
+//* para ocultar y mostrar el panel: 
+/**
+import React, { useState } from 'react';
+
+function App() {
+  // 1. Definimos el estado (por defecto visible)
+  const [mostrar, setMostrar] = useState(true);
+
+  return (
+    <div style={{ padding: '20px' }}>
+      2. El botón cambia el estado al valor opuesto 
+      <button onClick={() => setMostrar(!mostrar)}>
+        {mostrar ? 'Ocultar' : 'Mostrar'} contenido
+      </button>
+
+      3. Renderizado condicional
+      {mostrar && (
+        <div style={{ 
+          marginTop: '10px', 
+          padding: '10px', 
+          border: '1px solid black' 
+        }}>
+          ¡Hola! Soy el contenido que aparece y desaparece.
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
+
+¿Y si quieres animaciones?
+Si prefieres que no desaparezca de golpe del HTML sino que solo se oculte visualmente (para usar transiciones de CSS), puedes cambiar el renderizado condicional por una clase dinámica:
+jsx
+<div className={mostrar ? 'visible' : 'oculto'}>
+  Contenido con transiciones
+</div>
+
+*/
+
 /* "use client";
 
 import { useState } from "react";

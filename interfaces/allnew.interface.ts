@@ -29,6 +29,7 @@ export interface Marca2 {
         seccion: string; // responsabilidad pais
         criterioNombre: string; // criterios de paises
         valor: any; // participaciones 
+        explicacion?: string,
         puntos: number; // puntos pais
         fuente: string;
     }[]

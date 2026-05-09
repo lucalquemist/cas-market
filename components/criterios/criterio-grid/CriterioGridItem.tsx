@@ -36,16 +36,16 @@ export const CriterioGridItem = ({ criterio }: Props) => {
             <div className={
               clsx("px-1 rounded",
                 {
-                  'bg-red-800': criterio.tipo == 'boicot',
-                  'bg-blue-600': criterio.tipo == 'estructural', //* corregir
+                  'bg-rojo': criterio.tipo == 'boicot',
+                  'bg-azul': criterio.tipo == 'estructural', //* corregir
                 }
               )
             }>{criterio.tipo}</div>
             <div className={
               clsx("px-1 rounded ",
                 {
-                  'bg-yellow-600': criterio.implicado == 'paises',
-                  'bg-indigo-700': criterio.implicado == 'empresas',
+                  'bg-amarillo': criterio.implicado == 'paises',
+                  'bg-violeta': criterio.implicado == 'empresas',
                 }
               )
             }>{criterio.implicado}</div>
@@ -60,6 +60,11 @@ export const CriterioGridItem = ({ criterio }: Props) => {
 
   )
 }
+
+// bg-red-800
+// bg-blue-600
+// bg-yellow-600
+// bg-indigo-700
 
 // bg-green-700
 // border-4 border-sky-500

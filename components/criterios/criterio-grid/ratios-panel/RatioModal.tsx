@@ -57,6 +57,9 @@ export const RatioModal = ({
   };
 
   const decreaseD = () => {
+
+    if(0.0 >= value) return;
+
     const newValue = Number((value - 0.1).toFixed(1));
 
     setValue(newValue);
@@ -73,6 +76,9 @@ export const RatioModal = ({
   };
 
   const decreaseU = () => {
+
+    if(0.9 >= value) return;
+
     const newValue = Number((value - 1.0).toFixed(1));
 
     setValue(newValue);
@@ -86,6 +92,7 @@ export const RatioModal = ({
       onClose={onClose}
       onCancel={onClose}
       className="p-6 rounded-xl shadow-xl backdrop:bg-black/50"
+      closedby="any"
     >
       <div className="flex flex-col gap-5 items-center">
         <h2 className="text-xl font-bold">
