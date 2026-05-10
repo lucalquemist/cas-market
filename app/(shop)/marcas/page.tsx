@@ -119,12 +119,17 @@ export default function MarcasPage() {
             marcai.variables = variablesFiltradas;
         } 
 
+        let hayCriteriosPais = false;
+
         // calcularPuntosMarcasPaises(criterios, paises);
-        sumarMarcaPais(marcas, paisesAct); // le agrega los puntos de los paises a las marcas
+        // sumarMarcaPais(marcas, paisesAct); // le agrega los puntos de los paises a las marcas
 
         for (const criterio of criterios) { // recorremos los criterios
 
-            if (criterio.implicado !== 'empresas') { continue } // esta funcion es para empresas
+            if (criterio.implicado !== 'empresas') {
+                hayCriteriosPais = true;
+                continue
+            } // esta funcion es para empresas
 
             for (const marca of marcas) { // en cada criterio recorremos todas las marcas
 
@@ -169,6 +174,9 @@ export default function MarcasPage() {
                 }
             }
         }
+
+        if (hayCriteriosPais) sumarMarcaPais(marcas, paisesAct);
+
         marcas.sort((a, b) => b.puntuacion.criterios['total'].puntos - a.puntuacion.criterios['total'].puntos)// ordenamos las marcas por puntuación obtenida
         
         console.log('marcas actualizadas con info de criterios: ')

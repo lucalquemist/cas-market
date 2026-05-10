@@ -16,6 +16,7 @@ export const MainMarca = ({ marca }: Props) => {
     console.log(marca2);
 
     const [orden, setOrden] = useState(true);
+    const [mostrar, setMostrar] = useState(false);
 
     const variablesConCriterio = marca2.variables.filter(v => v.criterioNombre !== '')
 
@@ -60,10 +61,23 @@ export const MainMarca = ({ marca }: Props) => {
                             {Object.entries(variables).map(([key, value]) => (
                                 <div key={key} className="pl-3">
                                     
-                                    <p> {value.variable}: {value.valor} ({value.puntos}) </p>
+                                    <div className="flex">
+                                        <p> {value.variable}: {value.valor} ({value.puntos}) </p>
+
+                                        { value.explicacion && (
+                                            <button 
+                                                onClick={() => setMostrar(!mostrar)}
+                                                className="ml-2 bg-amber-500 rounded-xs px-1"
+                                            >
+                                                {mostrar ? 'Ocultar' : 'Mostrar'}
+                                            </button> 
+                                        ) }
+                                    </div>
                                     
-                                    { value.explicacion && (
-                                        <p> {` * (${value.explicacion})`} </p>
+                                    { value.explicacion && mostrar && (
+                                        <div className="pl-3 ">
+                                            <p className="bg-gray-700 rounded-xs px-1"> {` * (${value.explicacion})`} </p>
+                                        </div>
                                     )}
                                 
                                 </div>
