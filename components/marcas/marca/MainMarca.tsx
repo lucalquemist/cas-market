@@ -10,6 +10,108 @@ interface Props {
 
 export const MainMarca = ({ marca }: Props) => {
 
+    const marca2 = useMarcaStore(store => store.marcasScore.find(marcax => marcax.id === marca.id)) as Marca2 //* en el store no hay nada si uno entra directamente a la marca
+
+    console.log('marca2 main: ');
+    console.log(marca2);
+
+    const [orden, setOrden] = useState(true);
+    const [mostrar, setMostrar] = useState(false);
+
+    const variablesConCriterio = marca2.variables.filter(v => v.criterioNombre !== '')
+
+    console.log('variablesConCriterio: ');
+    console.log(variablesConCriterio);
+
+    const variablesAgrupadas = Object.groupBy(
+        variablesConCriterio,
+        (variable) => orden ? variable?.seccion : variable?.criterioNombre
+    );
+
+    //const productosAgrupados = Object.groupBy(marca2?.variables, (v) => v?.criterioNombre) // me devuelve un objeto con varios arreglos de objetos variables
+
+    const handleClick = () => {
+        setOrden(prev => !prev); // a veces queda al revés
+    }
+
+    return (
+        <div className="ml-3 ">
+            <div className="">
+                <p>{marca2.name} - {marca2.category}</p>
+                <div className="mt-5 mb-2 max-w-60" onClick={handleClick}>
+                    <p className="flex justify-center bg-blue-600 hover:bg-blue-800 text-white py-1 px-2 rounded transition-all cursor-pointer ml-auto">
+                        agrupar en {orden ? ' secciones' : ' criterios'}
+                    </p>
+                </div>
+            </div>
+            <hr className="mt-3 mb-3" />
+            {Object.entries(variablesAgrupadas).map(
+                ([ordenador, variables]) => {
+
+                    if (!variables) return null;
+
+                    const puntos = orden
+                        ? marca2.puntuacion.sections?.[ordenador]?.puntos
+                        : marca2.puntuacion.criterios?.[ordenador]?.puntos;
+
+                    return (
+                        <div key={ordenador} className="m-2 mb-2">
+
+                            <h3>
+                                {ordenador} ({puntos ?? 0})
+                            </h3>
+
+                            {variables.map((value, index) => (
+                                <div key={index} className="pl-3">
+
+                                    <div className="flex">
+                                        <p>
+                                            {value.variable}: {value.valor} ({value.puntos})
+                                        </p>
+
+                                        {value.explicacion && (
+                                            <button
+                                                onClick={() => setMostrar(!mostrar)}
+                                                className="ml-2 bg-amber-500 rounded-xs px-1"
+                                            >
+                                                {mostrar ? 'Ocultar' : 'Mostrar'}
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {value.explicacion && mostrar && (
+                                        <div className="pl-3 ">
+                                            <p className="bg-gray-700 rounded-xs px-1">
+                                                {` * (${value.explicacion})`}
+                                            </p>
+                                        </div>
+                                    )}
+
+                                </div>
+                            ))}
+                        </div>
+                    );
+                }
+            )}
+
+            <p>Total: {marca2.puntuacion.criterios['total'].puntos}</p>
+            <hr className="mt-3 mb-3" />
+        </div>
+    )
+}
+
+/* 'use client';
+
+import { Marca2 } from "@/interfaces";
+import { useMarcaStore } from "@/store";
+import { useState } from "react";
+
+interface Props {
+    marca: Marca2;
+}
+
+export const MainMarca = ({ marca }: Props) => {
+
     const marca2 = useMarcaStore(store => store.marcasScore.find( marcax => marcax.id === marca.id )) as Marca2 //* en el store no hay nada si uno entra directamente a la marca
     
     console.log('marca2 main: ');
@@ -27,16 +129,11 @@ export const MainMarca = ({ marca }: Props) => {
         variablesConCriterio,
         (variable) => orden ? variable?.seccion : variable?.criterioNombre
     );
-
-    /*const variablesAgrupadas = Object.groupBy(
-        marca2?.variables,
-        (variable) => orden ? variable?.seccion : variable?.criterioNombre
-    );*/
     
     //const productosAgrupados = Object.groupBy(marca2?.variables, (v) => v?.criterioNombre) // me devuelve un objeto con varios arreglos de objetos variables
 
     const handleClick = () => {
-        setOrden(prev => !prev); //* a veces queda al revés
+        setOrden(prev => !prev); // a veces queda al revés
     }
 
     return (
@@ -56,7 +153,7 @@ export const MainMarca = ({ marca }: Props) => {
 
                     return (
                         <div key={ordenador} className="m-2 mb-2">
-                            <h3>{ordenador}</h3>
+                            <h3>{ordenador} {marca2.puntuacion.criterios[ordenador].puntos || marca2.puntuacion.sections[ordenador].puntos}</h3>
 
                             {Object.entries(variables).map(([key, value]) => (
                                 <div key={key} className="pl-3">
@@ -91,7 +188,7 @@ export const MainMarca = ({ marca }: Props) => {
             <hr className="mt-3 mb-3" />
         </div>
     )
-}
+} */
 
 /*
 * implementar la linea punteada hasta completar el ancho del renglón

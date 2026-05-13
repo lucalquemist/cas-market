@@ -8,160 +8,150 @@ import { RatiosPanel } from "./ratios-panel/RatiosPanel";
 
 
 interface Props {
-  criterios: Criterio2[];
+	criterios: Criterio2[];
 }
 
 
 export const CriterioGrid = ({ criterios }: Props) => {
 
-  const favorites = useCriteriosStore(state => state.favorites)
-  const favoritos = Object.values(favorites)
+	const favorites = useCriteriosStore(state => state.favorites)
+	const favoritos = Object.values(favorites)
 
-  /*let noFavs: Criterio2[] = [];
-  useEffect(() => {
-    noFavs = criterios.filter(c => {
-      return c.suscrito == false;
-    })
-  }, [favorites])*/
+	/*let noFavs: Criterio2[] = [];
+	useEffect(() => {
+	  noFavs = criterios.filter(c => {
+		return c.suscrito == false;
+	  })
+	}, [favorites])*/
 
-  return (
-    <div className="sm:flex">
-      <RatiosPanel />
-      <div className="ml-3 mr-3 max-w-300">
+	return (
+		<div className="sm:flex">
+			<RatiosPanel />
+			<div className="ml-3 mr-3 max-w-300">
 
-        <p className="mb-3">Criterios seleccionados:</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-          {
-            // aca vamos a mostrar unicamente los favoritos
-            favoritos.map(criterio => (
-              <CriterioGridItem
-                key={criterio.title}
-                criterio={criterio}
-              />
-            ))
-          }
-        </div>
+				<p className="mb-3">Criterios seleccionados:</p>
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+					{
+						// aca vamos a mostrar unicamente los favoritos
+						favoritos.map(criterio => (
+							<CriterioGridItem
+								key={criterio.title}
+								criterio={criterio}
+							/>
+						))
+					}
+				</div>
 
-        <hr className="border-t-4 border-blue-500 w-full pb-10" />
+				<hr className="border-t-4 border-blue-500 w-full pb-10" />
 
-        <p className="mb-3">Todos los criterios:</p>
+				<p className="mb-3">Todos los criterios:</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-          {
-            criterios.map(criterio => (
-              <CriterioGridItem
-                key={criterio.title}
-                criterio={criterio}
-              />
-            ))
-          }
-        </div>
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+					{
+						criterios.map(criterio => (
+							<CriterioGridItem
+								key={criterio.title}
+								criterio={criterio}
+							/>
+						))
+					}
+				</div>
 
-      </div>
-    </div>
-  )
+			</div>
+		</div>
+	)
 }
 
 /*
-* //? implementar la no tranzabilidad de un criterio
-
-* //? los datos de responsabilidad del pais solo hay que mostrarlos cuando se está suscrito a los criterios correspondientes
-* después vamos a mostrar toda la información pero clasificando en que está suscrito uno y en que no, además de los porcentajes
-
-* //? mostrar el subtotal de cada sección de la marca
+* TAREAS ACTUALES ********************************************************************************************************************************************
+* //? implementar la no tranzabilidad de un criterio, suscripción por niveles, a medida que aumenta el nivel se vuelve mas restrictivo
+  definimos un conjunto de limites (puntuaciones de variables) los cuales una vez transgredidos por la marca se genera una etiqueta que así lo expresa
 
 * //? implementar marcas ficticias
 
-* corregir los algoritmos para que muestren el porcentaje de información obtenida
+* //? redactar los criterios como argumentos
 
-* criterios de empresas
-* //? paridad de género en las distintas áreas de la empresa según corresponda
-
-* criterios de países
-* 
+* CRITERIOS DE PAÍSES *****************************************************************************************************************************************
+* 2) contra la guerra: criterio que penaliza los países por sus crímenes de guerra
 * //? 3) contra la contaminación ambiental 
 * 4) para mejorar la educación
 * 5) para mejorar la salud pública
 * 6) para mejorar la eficiencia del gasto del estado
 * 7) para regular el uso de patentes
 * 8) para mejorar la justicia
-* //? 9) contra la guerra: criterio que penaliza los países por sus crímenes de guerra
+
+* CRITERIOS DE EMPRESAS **************************************************************************************************************************************
+* //? paridad de género en las distintas áreas de la empresa según corresponda
+* poner fin a la obsolescencia programada
+* sobregiro ecológico(empresa, gobierno, usuarios) y huella ecológica por persona, este criterio tendría el objetivo de modificar los comportamientos de consumo de las personas de mayores
+* 	ingresos haciendo foco en no excederse de la huella que le corresponde a cada individuo 
+* medio ambiente, ver greenwalling
+* criterio de paridad ( de género, étnico, etario, condición de discapacidad, orientación sexual e identidad de género )
+* evitar que las empresas que no tienen empleados tengan ganancias  
+* suma muchos puntos que una empresa haga algo de forma ética en países donde se permite la maldad (color verde)
+* empaquetado de productos
+* etiquetado de alimentos
+* proyección de la empresa (promesas)
+* presionar a las inmobiliarias: leyes que regulen fuertemente
+* salud mental, mide el impacto de las apps
+* criterio: mecanismos para que una empresa exonere o disminuya los puntos perdidos por culpa del gobierno
+* criterios para los usuarios: estos criterios son condiciones que los usuarios deben cumplir como requisito para poder acceder a tal o cual empresa
+* criterios que apliquen a entes no gobiernos y no empresas (en relación a la transparencia y a mecanismos de medición)
 
 * //? hacer criterios de otro tipo: usar la plata para fundar empresas automatizadas que nos vendan los artículos a precio de costo
-* ejemplo2: poner fin a la obsolescencia programada
-* ejemplo2: poner fin a la obsolescencia programada
-* ejemplo3: sobregiro ecológico(empresa, gobierno, usuarios)
-* ejemplo4: huella ecológica por persona, este criterio tendría el objetivo de modificar los comportamientos de consumo de las personas de mayores
-* ingresos haciendo foco en no excederse de la huella que le corresponde a cada individuo 
-* ejemplo5: criterio de paridad ( de género, étnico, etario, condición de discapacidad, orientación sexual e identidad de género )
-* un criterio que sea un mecanismo de financiación de múltiples proyectos 
-* un criterio para evitar que las empresas que no tienen empleados tengan ganancias  
-* criterio contra el genocidio de palestinos
-* criterios para los usuarios: estos criterios son condiciones que los usuarios deben cumplir como requisito para poder acceder a tal o cual empresa
-* criterio: suma muchos puntos que una empresa haga algo de forma ética en países donde se permite la maldad (color verde)
-* criterio de empaquetado de productos
-* criterio de etiquetado de alimentos
-* criterios que apliquen a entes no gobiernos y no empresas (en relación a la transparencia y a mecanismos de medición)
-* criterio medio ambiente, ver greenwalling
-* criterio de proyección de la empresa
-* ¿criterio para presionar a las inmobiliarias¿ opción: leyes que regulen fuertemente
-* criterio: mecanismos para que una empresa exonere o disminuya los puntos perdidos por culpa del gobierno
 
-
-* tipos de criterios: 
-*    boicot            ( castiga comportamientos maliciosos restando puntos ) rojo
-*    restaurador       ( premia buenas acciones sumando con puntos ) verde
-*    estructural       ( promueve cambios en las estructuras de poder ) azul
-
-* hacer curso de tailwind
 * hacer curso de cssgrid
 
-* corregir estilos en tema claro y oscuro, corregir saltos de linea en criterio descripción
+* corregir estilos en tema claro y oscuro, corregir saltos de linea en criterio descripción, quitar los guiones bajos _
 
-* sistema de puntos de país: comparar área a área de cada país y nos quedamos con la peor puntuación de cada area
+* //? después vamos a mostrar toda la información de la marca pero clasificando en que está suscrito uno y en que no, 
+* //? además de los porcentajes. agregar también todas las variables
 
-* mostrar las fuentes en las marcas
-
-* "¿que pueden hacer las empresas para recuperar puntos perdidos por este criterio¿"
-* ejemplo: cada criterio gub tiene debajo un selector de opción/es de indulto/s y un selector del % de exoneración
-
-* CRITERIOS
+* CRITERIOS ****************************************************************************************************************************************
 * agregar filtro selector de tipo de criterio y filtro selector de actor implicado (por ahora empresa o gobierno)
 
 * ver los casos de las empresas como películas, futbol, manga/anime, etc. en los que queremos proponer alternativas
 * ver caso de turismo, criterio sobre hoteles y demás empresas/gobiernos según corresponda
-* 
-* ¿Cómo podemos mostrar las mayores oportunidades de productos en los que mas haga falta emprender¿
-* R: revisando sector por sector y viendo el área roja (cuota de mercado x puntaje rojo de la empresa)
-* ejemplo: industria de celulares - cantidad de usuarios iPhone * -180 + lo mismo con Samsung, etc. eso nos da la cantidad de rojo en el mercado
 
 * agregar atributo que diga si los índices son reales o ficticios
 
-* criterio para que los usuarios inscriptos ganen descuentos, puede ser un sistema de puntos/méritos para atraer mas usuarios
+criterio para que los usuarios inscriptos ganen descuentos, puede ser un sistema de puntos/méritos para atraer mas usuarios
 
 ¿agregamos un arreglo con la información de las empresas de los países que intervienen en las distintas etapas de producción del producto¿
- 
+
 en el algoritmo de calculo de puntos del país:
-agregar las variables cuya información es desconocida al resultado 
 implementar un sistema que refleje la cantidad de información procesada
 a la hora de mostrar un país muestro su info y le agrego las variables que me piden los criterios
 aunque no tengan datos, agrego un dato de porcentaje de datos obtenidos
-surgen criterios para autocompletar los datos faltantes
-* de momento corregir la info que muestran las empresas para que al menos muestren lo que ya traen
+surgen criterios para autocompletar los datos faltantes¿
 
+* en los criterios positivos son las empresas las que se suscriben y al avanzar en determinados objetivos van recibiendo puntos y subiendo de nivel en determinadas áreas
+ 
 * implementar un sistema que muestre los sectores en los que más hace falta emprender de manera responsable
 para calcularlos hacemos la suma de la multiplicación de la cuota de mercado de cada una de las empresas 
 del sector por la cantidad de puntos negativos de la misma
 
-la idea de los criterios es que la gente funde nuevas empresas que hagan bien todo lo que las empresas actuales están haciendo mal
+tipos de criterios: 
+boicot            ( castiga comportamientos maliciosos restando puntos ) rojo
+restaurador       ( premia buenas acciones sumando con puntos ) verde
+estructural       ( promueve cambios en las estructuras de poder ) azul
+mecanismo		  ( son herramientas a las que se suscriben las empresas ) amarillo
+
+"¿que pueden hacer las empresas para recuperar puntos perdidos por re¿" ejemplo: cada criterio gub tiene debajo un selector de opción/es de indulto/s y un selector del % de exoneración
+
+* MARCAS ******************************************************************************************************************************************
+* mostrar las fuentes de los datos en las marcas
+* //? agregar marcas que aun no existen pero que están siendo financiadas por un mecanismo para producir de forma etica
+* //? también se puede agregar las marcas que aun no existen pero que son promesas de un emprendedor cuando se alcance determinada cantidad de potenciales clientes
+*  botón de { Me Apunto }
+
+* VISTA DE EMPRENDEDOR *************************************************************************************************************************************
+* ¿Cómo podemos mostrar las mayores oportunidades de productos en los que mas haga falta emprender¿
+* R: revisando sector por sector y viendo el área roja (cuota de mercado x puntaje rojo de la empresa)
+* ejemplo: industria de celulares - cantidad de usuarios iPhone * -180 + lo mismo con Samsung, etc. eso nos da la cantidad de rojo en el mercado
 
 * FUTURO
 agregar el control de selección de sistema y estrategia de puntuación (ejemplo: estrategia que multa con perdidas extra los retrocesos en puntos)
-
-al mostrar una marca se muestran por defecto los atributos de los criterios seleccionados, agregar opción de ver todos los datos
-
-cambiar el algoritmo de países, agregamos un criterio activado por defecto en el que se agrega la información a medida que nos suscribimos
-a los criterios de países
 
 ¿implementar la proyección de la empresa ¿ la proyección de la empresa es un conjunto de variables cuyo valor aún no se a logrado pero es 
 algo a lo que la empresa apunta o promete en caso de que se cumplan determinadas condiciones previas

@@ -44,7 +44,7 @@ export const CriterioGridItem = ({ criterio }: Props) => {
             <div className={
               clsx("px-1 rounded ",
                 {
-                  'bg-amarillo': criterio.implicado == 'paises',
+                  'bg-verde': criterio.implicado == 'paises',
                   'bg-violeta': criterio.implicado == 'empresas',
                 }
               )

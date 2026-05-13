@@ -477,7 +477,7 @@ export const initialData: seedData = {
                     section: 'economia',
                     formula: 'multiplicacion',
                     options: {
-                        multiplicacion: { score: -10, description: 'el valor de esta variable va del 0 (riesgo bajo) al 10 (riesgo alto) y el puntaje del criterio se obtiene al multiplicarlo por -10' },
+                        multiplicacion: { score: -50, description: 'el valor de esta variable va del 0 (riesgo bajo) al 10 (riesgo alto) y el puntaje del criterio se obtiene al multiplicarlo por -10' },
                     }
                 },
             },
