@@ -151,11 +151,14 @@ export default function MarcasPage() {
                         if (criterio.variables[variable.variable].options[variable.valor]) { // la opción elegida es válida
 
                             variable.puntos = criterio.variables[variable.variable].options[variable.valor].score * criterio.ratio //* agregamos la puntuación que corresponda 
-
+                            //* acá va el chequeo de nivel de la variable
+                            // if ( variable.limite < variable.puntos ) se agrega una redflag
+                            // niveles criterios
                             puntosCriterio += variable.puntos // acumulo los puntos de las variables
                         }
                     }
                 }
+                //* acá va el cheque de nivel del criterio
 
                 if (!marca.puntuacion.criterios[criterio.slug] && puntosCriterio < 0) { // hay puntos, los asigno //? estoy acá
                     marca.puntuacion.criterios[criterio.slug] = { puntos: puntosCriterio, porcentaje: 0 }

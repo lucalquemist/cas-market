@@ -10,6 +10,7 @@ interface SeedCriterio2 {
     tipo: string;
     ratio: number;
     suscrito: boolean;
+    suscripcion: string[];
     suscripciones: number;
     variables: {
         [key: string]: { // variable
@@ -114,6 +115,12 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscrito: true,
+            suscripcion: [
+                'no me molesta que los productos que compro sean hechos por niños esclavos',
+                'prefiero productos que no sean realizados mediante la explotación de niños',
+                'no estoy dispuesto a comprar productos que hayan sido realizados por niños en condiciones de esclavitud',
+                'no estoy dispuesto a comprar productos que hayan sido realizados por niños, nungún niño debería trabajar'
+            ],
             suscripciones: 1234567,
             variables: {
                 grado_de_explotación_infantil: {
@@ -140,6 +147,7 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: {
                 severidad_de_experimentos_en_animales: {
@@ -206,8 +214,9 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscripciones: 1234567,
             suscrito: true,
+            suscripcion: [],
+            suscripciones: 1234567,
             variables: {
                 responsabilidad_belica_empresarial: {
                     description: 'calcula el nivel de responsabilidad de la marca en crimenes de guerra ligados al genocidio de poblaciones',
@@ -230,6 +239,7 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: {
                 presencia_de_trabajo_forzoso: {
@@ -284,6 +294,7 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: {
                 Falta_de_Proporcionalidad_y_Necesidad: {
@@ -339,6 +350,7 @@ export const initialData: seedData = {
             tipo: 'estructural',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: {
                 concentracion_de_la_riqueza: {
@@ -361,6 +373,7 @@ export const initialData: seedData = {
             tipo: 'estructural',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: {
                 concentracion_de_la_riqueza: {
@@ -384,6 +397,7 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: { //* facilitadores del abuso fiscal corporativo
                 puntaje_de_guarida_fiscal: { //https://cthi.taxjustice.net/es/full-list
@@ -470,6 +484,7 @@ export const initialData: seedData = {
             tipo: 'boicot',
             ratio: 1,
             suscrito: true,
+            suscripcion: [],
             suscripciones: 1234567,
             variables: {
                 Indice_Basel_AML: {
@@ -1428,129 +1443,4 @@ export const initialData: seedData = {
 * luego de aplicar los criterios también se pueden activar otro tipo de criterios que contemplan
 * si la empresa es nueva y a la misma no se le aplican determinados criterios
 
-*/
-
-/*
-    paises: [
-        {
-            nombre: 'USA',
-            score: {
-                total: 0,
-            },
-            sections: {
-                justicia: {
-                    derechos_humanos_fundamentales: { valor: '0.65', score:-35, fuente: 'worldjusticeproject' },
-                },
-                economia: {
-                    //* datos de evasion fiscal y secreto financiero
-                    puntaje_de_guarida_fiscal: { valor: 45, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    GSW_de_abuso_fiscal: { valor: 13.2, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    valor_de_IGFC: { valor: 455, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    cuota_CTHI: { valor: 1.1, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    Puntaje_de_opacidad: { valor: 69, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    GSW_de_secreto_financiero: { valor: 24.54, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    valor_de_FSI: { valor: 2018, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    porcenraje_de_FSI: { valor: 5.66, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
-                    Indice_Basel_AML: { valor: 4.83, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
-                },
-            },
-        },
-        {
-            nombre: 'China',
-            score: {
-                total: 0
-            },
-            sections: {
-                justicia: {
-                    derechos_humanos_fundamentales: { valor: '0.57', score:-43, fuente: 'worldjusticeproject' },
-                },
-                economia: {
-                    //* datos de evasion fiscal y secreto financiero
-                    puntaje_de_guarida_fiscal: { valor: 62, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    GSW_de_abuso_fiscal: { valor: 6.3, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    valor_de_IGFC: { valor: 928, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    cuota_CTHI: { valor: 2.3, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    Puntaje_de_opacidad: { valor: 70, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    GSW_de_secreto_financiero: { valor: 0.61, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    valor_de_FSI: { valor: 620, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    porcenraje_de_FSI: { valor: 1.74, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
-                    Indice_Basel_AML: { valor: 7.26, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
-                },
-            },
-        },
-        {
-            nombre: 'Suecia',
-            score: {
-                total: 0
-            },
-            sections: {
-                justicia: {
-                    derechos_humanos_fundamentales: { valor: '0.87', score:-13, fuente: 'worldjusticeproject' },
-                },
-                economia: {
-                    //* datos de evasion fiscal y secreto financiero
-                    puntaje_de_guarida_fiscal: { valor: 57, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    GSW_de_abuso_fiscal: { valor: 1.1, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    valor_de_IGFC: { valor: 417, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    cuota_CTHI: { valor: 1.0, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    Puntaje_de_opacidad: { valor: 44, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    GSW_de_secreto_financiero: { valor: 0.77, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    valor_de_FSI: { valor: 173, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    porcenraje_de_FSI: { valor: 0.48, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
-                    Indice_Basel_AML: { valor: 3.48, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
-                },
-            },
-        },
-        {
-            nombre: 'Francia',
-            score: {
-                total: 0
-            },
-            sections: {
-                justicia: {
-                    derechos_humanos_fundamentales: { valor: '0.73', score:-27, fuente: 'worldjusticeproject' },
-                },
-                economia: {
-                    //* datos de evasion fiscal y secreto financiero
-                    puntaje_de_guarida_fiscal: { valor: 65, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    GSW_de_abuso_fiscal: { valor: 2.8, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    valor_de_IGFC: { valor: 855, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    cuota_CTHI: { valor: 2.1, score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    Puntaje_de_opacidad: { valor: 52, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    GSW_de_secreto_financiero: { valor: 3.56, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    valor_de_FSI: { valor: 455, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    porcenraje_de_FSI: { valor: 1.28, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
-                    Indice_Basel_AML: { valor: 3.99, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
-                },
-            },
-        },
-        {
-            nombre: 'Vietnam',
-            score: {
-                total: 0
-            },
-            sections: {
-                justicia: {
-                    derechos_humanos_fundamentales: { valor: '0.47', score:-53, fuente: 'worldjusticeproject' },
-                },
-                economia: { //? en estos casos el algoritmo deberá procesar información incompleta de un país 
-                    //* datos de evasion fiscal y secreto financiero
-                    //puntaje_de_guarida_fiscal: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    //GSW_de_abuso_fiscal: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    //valor_de_IGFC: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    //cuota_CTHI: { valor: , score: 0, fuente: 'https://cthi.taxjustice.net/es/full-list' },
-                    Puntaje_de_opacidad: { valor: 75, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    GSW_de_secreto_financiero: { valor: 0.03, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    valor_de_FSI: { valor: 288, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    porcenraje_de_FSI: { valor: 0.81, score: 0, fuente: 'https://fsi.taxjustice.net/es/full-list/#scoring_id=268' },
-                    //* datos de riesgo de lavado de activos y financiamiento del terrorismo
-                    Indice_Basel_AML: { valor: 6.69, score: 0, fuente: 'https://index.baselgovernance.org/ranking' },
-                },
-            },
-        },/*
-    ],
 */
