@@ -4,6 +4,7 @@ import { initialData } from '@/seed/seed';
 import { useCriteriosStore } from '@/store';
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
+import { Criterio2 } from '@/interfaces';
 
 export const CargadorCriterios = () => {
 
@@ -12,7 +13,8 @@ export const CargadorCriterios = () => {
     const addFavorite = useCriteriosStore(state => state.addFavorite)
     
     for (const criterio of allCriterios) {
-        addFavorite(criterio);
+        const criterioSuscrito: Criterio2 = { ...criterio, suscrito: 1, };
+        addFavorite(criterioSuscrito);
     }
 
     console.log('criterios agregados')

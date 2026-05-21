@@ -158,7 +158,7 @@ export default function MarcasPage() {
                         }
                     }
                 }
-                //* acá va el cheque de nivel del criterio
+                //* acá va el chequeo de nivel del criterio 
 
                 if (!marca.puntuacion.criterios[criterio.slug] && puntosCriterio < 0) { // hay puntos, los asigno //? estoy acá
                     marca.puntuacion.criterios[criterio.slug] = { puntos: puntosCriterio, porcentaje: 0 }

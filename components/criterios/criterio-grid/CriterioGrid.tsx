@@ -64,8 +64,8 @@ export const CriterioGrid = ({ criterios }: Props) => {
 * EN GENERAL **************************************************************************************************************************************************
 * CRITERIOS DE PAÍSES *****************************************************************************************************************************************
 
-* 2) contra la guerra: criterio que penaliza los países por sus crímenes de guerra
-* //? 3) contra la contaminación ambiental 
+* //? 2) contra la contaminación ambiental 
+* 3) contra la guerra: criterio que penaliza los países por sus crímenes de guerra
 * 4) para mejorar la educación
 * 5) para mejorar la salud pública
 * 6) para mejorar la eficiencia del gasto del estado
@@ -74,8 +74,8 @@ export const CriterioGrid = ({ criterios }: Props) => {
 
 * CRITERIOS DE EMPRESAS **************************************************************************************************************************************
 
-* paridad de género en las distintas áreas de la empresa según corresponda
 * //? poner fin a la obsolescencia programada
+* paridad de género en las distintas áreas de la empresa según corresponda
 * sobregiro ecológico(empresa, gobierno, usuarios) y huella ecológica por persona, este criterio tendría el objetivo de modificar los comportamientos de consumo de las personas de mayores
 * 	ingresos haciendo foco en no excederse de la huella que le corresponde a cada individuo 
 * medio ambiente, ver greenwalling
@@ -97,6 +97,11 @@ export const CriterioGrid = ({ criterios }: Props) => {
 * //? además de los porcentajes. agregar también todas las variables
 
 * CRITERIOS ***************************************************************************************************************************************************
+
+la fuente de la verdad de los criterios es el store, guardamos y recuperamos los cambios que el usuario realiza, el seed lo usamos solo al inicio
+mas adelante vamos a implementar el local storage
+
+* //? resolver la UX de la selección de criterios, duplicados y agregar botón de ver
 
 * //? implementar la no tranzabilidad de un criterio, suscripción por niveles, a medida que aumenta el nivel se vuelve mas restrictivo
 definimos un conjunto de limites (puntuaciones de variables) los cuales una vez transgredidos por la marca se genera una etiqueta que así lo expresa
@@ -158,6 +163,8 @@ petición          ( son peticiones para que se hagan leyes o mecanismos )
 botón de { Me Apunto }
 
 * //? implementar iconos, flechita para desplegar y mostrar el detalle de los datos
+
+* las marcas destacadas van a recibir en su perfil un enlace a su sitio web y sucursales en el país del usuario
 
 * ESTILOS CSS TAILWIND *************************************************************************************************************************************
 * hacer curso de cssgrid

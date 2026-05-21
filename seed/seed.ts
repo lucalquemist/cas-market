@@ -9,7 +9,7 @@ interface SeedCriterio2 {
     implicado: string;
     tipo: string;
     ratio: number;
-    suscrito: boolean;
+    suscrito: number; // nivel de la suscripción
     suscripcion: string[];
     suscripciones: number;
     variables: {
@@ -22,9 +22,19 @@ interface SeedCriterio2 {
                     score: number;
                     description: string;
                 }
-            }
+            },
+            rangos: {
+                nombre: string;
+                min: number;
+                max: number;
+            }[],
         }
-    }
+    },
+    rangos: {
+        nombre: string;
+        min: number;
+        max: number;
+    }[],
 }
 
 interface SeedMarca2 {
@@ -61,7 +71,6 @@ interface SeedMarca2 {
         fuente: string,
     }[];
 }
-
 
 export interface SeedPais {
     nombre: string;
@@ -114,12 +123,12 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [
                 'no me molesta que los productos que compro sean hechos por niños esclavos',
                 'prefiero productos que no sean realizados mediante la explotación de niños',
                 'no estoy dispuesto a comprar productos que hayan sido realizados por niños en condiciones de esclavitud',
-                'no estoy dispuesto a comprar productos que hayan sido realizados por niños, nungún niño debería trabajar'
+                'no estoy dispuesto a comprar productos que hayan sido realizados por niños, nungún niño debería trabajar',
             ],
             suscripciones: 1234567,
             variables: {
@@ -133,9 +142,13 @@ export const initialData: seedData = {
                         explotación_sexual: { score: -100, description: 'Prostitución infantil y producción de material pornográfico' },
                         reclutamiento_para_actividades_criminales: { score: -100, description: 'Uso de menores para el tráfico de drogas o conflictos armados (niños soldado)' },
                         trabajos_peligrosos: { score: -100, description: 'se expone a los niños a diversos peligros (minería, sustancias tóxicas, maquinaria pesada)' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
             },
+            rangos: []
         },
         {
             id: 102,
@@ -146,7 +159,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -160,6 +173,9 @@ export const initialData: seedData = {
                         severo: { score: -35, description: 'Procedimientos que causan un dolor, sufrimiento o angustia intensos, o que pueden afectar severamente el bienestar o el estado general del animal' },
                         terminal: { score: -50, description: ' Procedimientos que se realizan enteramente bajo anestesia general y sin que el animal recupere la consciencia' },
                     },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 confinamiento_extremo_y_hacinamiento: {
                     description: 'Uso de jaulas en batería para gallinas, jaulas de gestación para cerdas y corrales masificados, limitando drásticamente el movimiento natural',
@@ -168,6 +184,9 @@ export const initialData: seedData = {
                         verdadero: { score: -20, description: '' },
                         falso: { score: 0, description: '' }
                     },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
 
                 mutilaciones_sin_anestesia: {
@@ -178,6 +197,9 @@ export const initialData: seedData = {
                         verdadero: { score: -20, description: '' },
                         falso: { score: 0, description: '' }
                     },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 sobreexplotación_fisiologica: {
                     description: 'Cría selectiva y uso de hormonas/fármacos para un crecimiento antinatural y rápido, causando fallos orgánicos, cojeras y problemas óseos',
@@ -186,6 +208,9 @@ export const initialData: seedData = {
                         verdadero: { score: -20, description: '' },
                         falso: { score: 0, description: '' }
                     },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 negligencia_sistemica_en_los_cuidados: {
                     description: 'Falta de atención veterinaria individual, iluminación artificial continua y privación de agua/alimento en transportes',
@@ -194,6 +219,9 @@ export const initialData: seedData = {
                         verdadero: { score: -20, description: '' },
                         falso: { score: 0, description: '' }
                     },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 maltrato_fisico_directo: {
                     description: 'Falta de atención veterinaria individual, iluminación artificial continua y privación de agua/alimento en transportes',
@@ -202,8 +230,12 @@ export const initialData: seedData = {
                         verdadero: { score: -20, description: '' },
                         falso: { score: 0, description: '' }
                     },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
             },
+            rangos: []
         },
         {
             id: 103,
@@ -214,7 +246,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -225,9 +257,13 @@ export const initialData: seedData = {
                         complicidad_directa: { score: -100, description: 'Cuando la empresa provee suministros, tecnología, armas o servicios esenciales con conocimiento de que serán utilizados para cometer genocidio, crímenes de lesa humanidad o de guerra' },
                         complicidad_indirecta: { score: -80, description: 'La empresa se beneficia económica o logísticamente del contexto del genocidio, facilitando la operatividad de los perpetradores' },
                         Responsabilidad_por_Debida_Diligencia: { score: -60, description: 'La falta de implementación de medidas para identificar, prevenir y mitigar riesgos de derechos humanos en la cadena de suministro, lo que puede resultar en responsabilidad por negligencia' }
-                    }
-                }
-            }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
+                },
+            },
+            rangos: []
         },
         {
             id: 104,
@@ -238,7 +274,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -248,7 +284,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -100, description: '' },
                         falso: { score: 0, description: '' }
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 condiciones_insalubres_e_inseguras: {
                     description: 'trabajar en lugares peligrosos sin equipo de protección, poninedo en riesgo la integridad física o la vida',
@@ -256,7 +295,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -60, description: '' },
                         falso: { score: 0, description: '' }
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 jornadas_excesivas_y_falta_de_descansos: {
                     description: 'imponer horarios de trabajo extremos sin dias de descanso, vacaciones o tiempo para comer',
@@ -264,7 +306,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -40, description: '' },
                         falso: { score: 0, description: '' }
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 salarios_injustos_o_impagos: {
                     description: 'pagar sumas irrisorias, retener el sueldo(total o parcialmente) o el cobro forzoso de deudas por pasajes, vivienda o comida, creando una dependencia impagable',
@@ -272,7 +317,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -40, description: '' },
                         falso: { score: 0, description: '' }
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 aislamiento_y_violencia: {
                     description: 'retención del trabajador en el lugar de trabajo, violencia física, psicologica o sexual',
@@ -280,9 +328,13 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -70, description: '' },
                         falso: { score: 0, description: '' }
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
-            }
+            },
+            rangos: []
         },
         {
             id: 105,
@@ -293,7 +345,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -303,7 +355,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -15, description: '' },
                         falso: { score: 0, description: '' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 Ausencia_de_Consentimiento: {
                     description: 'Tratar datos personales sin obtener el consentimiento claro del titular o sin una base legal válida',
@@ -311,7 +366,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -25, description: '' },
                         falso: { score: 0, description: '' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 Deficiencias_de_Seguridad: {
                     description: 'Falta de políticas internas, cifrado o auditorías que resultan en fugas, hackeos o pérdida de información',
@@ -319,7 +377,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -25, description: '' },
                         falso: { score: 0, description: '' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 Uso_Opaco_y_Falta_de_Transparencia: {
                     description: 'No informar claramente qué datos se rastrean o cómo se utilizarán, incluyendo la venta no autorizada',
@@ -327,7 +388,10 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -20, description: '' },
                         falso: { score: 0, description: '' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 Incumplimiento_Normativo: {
                     description: 'No realizar evaluaciones de impacto (EIPD) ni cumplir con normativas de protección de datos, como mantener datos desactualizados o no eliminarlos',
@@ -335,9 +399,13 @@ export const initialData: seedData = {
                     options: {
                         verdadero: { score: -15, description: '' },
                         falso: { score: 0, description: '' },
-                    } // https://www.gub.uy/unidad-reguladora-control-datos-personales/comunicacion/publicaciones/guia-proteccion-datos-personales-para-empresas-especial-micro-pequenas-0 
-                },
-            }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
+                }, // https://www.gub.uy/unidad-reguladora-control-datos-personales/comunicacion/publicaciones/guia-proteccion-datos-personales-para-empresas-especial-micro-pequenas-0
+            },
+            rangos: []
         },
         //* criterios estructurales ... editando...
         {
@@ -349,7 +417,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'estructural',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -360,8 +428,12 @@ export const initialData: seedData = {
                     options: {
                         // una formula en la que se suman puntos si se tiene menos que 10M
                     },
-                }
-            }
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
+                },
+            },
+            rangos: []
         },
         {
             id: 109,
@@ -372,7 +444,7 @@ export const initialData: seedData = {
             implicado: 'empresas',
             tipo: 'estructural',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -383,8 +455,12 @@ export const initialData: seedData = {
                     options: {
                         // 
                     },
-                }
-            }
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
+                },
+            },
+            rangos: []
         },
         //* criterios de paises
         {
@@ -396,7 +472,7 @@ export const initialData: seedData = {
             implicado: 'paises',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: { //* facilitadores del abuso fiscal corporativo
@@ -406,7 +482,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -1, description: 'Los puntajes van del 0 (sin margen para el abuso fiscal) al 100 (margen ilimitado para el abuso fiscal) y el puntaje del criterio se calcula multiplicando el valor de este indicador por -1' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 GSW_de_abuso_fiscal: {
                     description: 'mide cuanta de la actividad financiera realizada por empresas multinacionales de todo el mundo entra o sale de la jurisdicción. Basado en datos del FMI sobre inversión extranjera directa',
@@ -414,7 +493,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -10, description: 'el valor de este indicador es el porcentaje de la actividad mundial en la jusrisdicción y el puntaje del criterio se calcula multiplicando el valor por -10' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 valor_de_IGFC: {
                     description: 'combina el puntaje de guarida fiscal y el peso a nivel global para determinar la importancia de la jurisdicción a la hora de permitir el abuso fiscal corporativo en todo el mundo. ',
@@ -422,7 +504,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -0.01, description: 'la puntuación del criterio se calcula dividiendo el valor del indicador entre -100' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 cuota_CTHI: {
                     description: 'el CTHI (índice de guaridas fiscales corporativas) mide que porcentaje de todo el abuso fiscal corporativo habilitado en todo el mundo es responsabilidad de la jurisdicción',
@@ -430,7 +515,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -10, description: 'la puntuación del criterio se calcula multiplicando el valor del indicador por -10' }, //* resolver: hacer que esto sea una calculadora, es score = value * -10
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 //* facilitadores del secreto financiero
                 Puntaje_de_opacidad: { //https://fsi.taxjustice.net/es/full-list/#scoring_id=268
@@ -439,7 +527,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -1, description: 'Un puntaje de 100 indica opacidad total y 0 transparencia total, la puntuación del criterio se calcula multiplicando el valor de este indicador por -1' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 GSW_de_secreto_financiero: {
                     description: 'La cuota de mercado de una jurisdicción en los servicios financieros internacionales, basada en datos del Fondo Monetario Internacional (FMI)',
@@ -447,7 +538,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -10, description: 'el punaje se calcula multiplicando el valor del indicador por -10' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 valor_de_FSI: {
                     description: 'el Índice de Secreto Financiero evalúa la opacidad financiera de las jurisdicciones (países/territorios) combinando dos factores: el "puntaje de secreto" (qué tan estrictas son sus leyes) y la escala de sus actividades financieras internacionales ',
@@ -455,7 +549,10 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -0.1, description: 'el puntaje se calcula dividiendo el valor del indicador entre -10' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
                 porcenraje_de_FSI: {
                     description: 'El porcentaje de FSI (Cuota FSI) en el Índice de Secreto Financiero de la Tax Justice Network mide qué parte del secreto financiero mundial total es responsabilidad de una jurisdicción específica. Se calcula dividiendo el valor FSI de la jurisdicción por la suma total de los valores FSI de todas las jurisdicciones, determinando su nivel de opacidad financiera a nivel global',
@@ -463,9 +560,13 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -20, description: 'el puntaje se determina multiplicando el valor por -20' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
             },
+            rangos: []
         },
         {
             id: 107,
@@ -483,7 +584,7 @@ export const initialData: seedData = {
             implicado: 'paises',
             tipo: 'boicot',
             ratio: 1,
-            suscrito: true,
+            suscrito: 0,
             suscripcion: [],
             suscripciones: 1234567,
             variables: {
@@ -493,9 +594,13 @@ export const initialData: seedData = {
                     formula: 'multiplicacion',
                     options: {
                         multiplicacion: { score: -50, description: 'el valor de esta variable va del 0 (riesgo bajo) al 10 (riesgo alto) y el puntaje del criterio se obtiene al multiplicarlo por -10' },
-                    }
+                    },
+                    rangos: [
+                        { nombre: '', min: 0, max: 0 },
+                    ]
                 },
             },
+            rangos: []
             /*
         {
             id: 10,

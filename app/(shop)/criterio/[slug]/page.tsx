@@ -1,7 +1,7 @@
 
-
 import { MainCriterio } from "@/components";
 import { initialData } from "@/seed/seed";
+import { useCriteriosStore } from "@/store";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -14,21 +14,12 @@ export default async function CriterioPage({ params }: Props) {
 
   const { slug } = await params;
 
-  const criterio = initialData.criterios2.find(
-    criterio => criterio.slug == slug
-  );
-
-  if ( !criterio ) {
-    console.log('no hay criterio');
-    notFound();
-  }
-
   return (
 
     <div>
       {
         <MainCriterio 
-          criterio={ criterio }
+          slug={ slug }
           //className="block md:hidden"
         />
       }

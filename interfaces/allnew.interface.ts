@@ -77,7 +77,8 @@ export interface Criterio2 {
     implicado: string;
     tipo: string;
     ratio: number;
-    suscrito: boolean;
+    suscrito: number; // nivel de la suscripción
+    suscripcion: string[];
     suscripciones: number;
     variables: {
         [key: string]: { // variable
@@ -89,9 +90,19 @@ export interface Criterio2 {
                     score: number;
                     description: string;
                 }
-            }
+            },
+            rangos: {
+                nombre: string;
+                min: number;
+                max: number;
+            }[],
         }
-    }
+    },
+    rangos: {
+        nombre: string;
+        min: number;
+        max: number;
+    }[],
 }
 
 /*
